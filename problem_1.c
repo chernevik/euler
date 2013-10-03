@@ -30,5 +30,12 @@ main()
     loop breaking from inside a switch:
     http://stackoverflow.com/questions/1420029/how-to-break-out-of-a-loop-from-inside-a-switch
 
+    Extend to arbitrary divisors by breaking up the incrementing of << sum >>,
+    putting incrementing for larger divisors in a loop through those larger
+    divisors.  
+    -   But then how to incorporate the logic check on duplication?  
+    -   That isn't hard if the code abandons the one liner and puts that logic
+        check in a loop.
+
  */
 
