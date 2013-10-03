@@ -13,14 +13,9 @@ int sum_divisibles()
 {
     int ndx, sum = 0;  int LIMIT = 1000; int mult_3, mult_5;
     while ( ++ndx ) {
-        if ( ( mult_3 = ndx * 3 ) < LIMIT ) {
-            sum += mult_3;
-            if ( ( mult_5 = ndx * 5 ) < LIMIT && mult_5 % 3 != 0 ) {
-                sum += mult_5 ;
-            }
-        } else {
-            break;
-        }
+        sum += ( ( mult_3 = ndx * 3 ) < LIMIT ) * mult_3 ;
+        if ( mult_3 >= LIMIT ) { break; };
+        sum += ( ( mult_5 = ndx * 5 ) < LIMIT && mult_5 % 3 != 0 ) * mult_5;
     };
     return sum;
 }
