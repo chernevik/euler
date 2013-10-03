@@ -9,13 +9,25 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
 /*  Answer: 233168 */
 
+/*
+    Complaints:
+
+    Any way to reduce the number of duplicative multiplication operations?
+
+ */
+
 int sum_divisibles()
 {
     int ndx, sum = 0;  int LIMIT = 1000;
-    while ( ++ndx < LIMIT ) {
-        if ( !( ndx % 3 ) || !( ndx % 5 ) ) {
-            sum += ndx ;
-        };
+    while ( ++ndx ) {
+        if ( ndx * 3 < LIMIT ) {
+            sum += ndx * 3 ;
+            if ( ndx * 5 < LIMIT && ( ndx * 5 ) % 3 != 0 ) {
+                sum += ndx * 5 ;
+            }
+        } else {
+            break;
+        }
     };
     return sum;
 }
