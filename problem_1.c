@@ -7,8 +7,23 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
  */
 
-/*  WORKS
+/*  ANSWER IS 
 
+    233168
+
+ */
+
+/*
+    NOTES
+
+    Can the loops be tightened by assigning the value of the multiplication
+    operations to a variable in the if checks?  I thought C offered some way of
+    doing that.
+
+ */
+
+/*  WORKS   --  v1
+ v1     */
 main()
 {
     int ndx, sum, LIMIT;
@@ -17,106 +32,117 @@ main()
     sum     =   0;  
     LIMIT   =   1000;
 
-    while ( 1 ) {
+    while ( ++ndx < LIMIT ) {
+    //-1-no while ( ndx++ < LIMIT ) {
+    //-1-while ( ndx < LIMIT ) {
+        // printf("%d\n", ndx);
+        if ( !( ndx % 3 ) || !( ndx % 5 ) ) {
+            // works bc % returns 0 if first argument divisible by second, 0 is
+            // logical FALSE, so reversal by ! makes it TRUE
+        // if ( ndx % 3 == 0  || ndx % 5 == 0) {
+            sum += ndx ;
+            // printf("%d\n", ndx );
+        }
+        //-1- ndx++;
+    }
 
+    //  Result
+    printf("%d\n", sum );
+    //  Check
+    printf("%d\n", sum == 233168 );
+
+}
+
+//-w3-  WORKS
+//-w3-main()
+//-w3-{
+//-w3-    int ndx;
+//-w3-    int sum     =   0;  
+//-w3-    int LIMIT   =   1000;
+//-w3-
+//-w3-    for ( ndx = 0; ndx < LIMIT; ndx++ ) {
+//-w3-        if ( ndx % 3 == 0  || ndx % 5 == 0) {
+//-w3-            sum += ndx ;
+//-w3-            // printf("%d\n", ndx );
+//-w3-        }
+//-w3-
+//-w3-        /*  
+//-w3-            Any pattern of remainders of 5 for integers divisible by 3?
+//-w3-            - early values are in a cycle, for each three the remainder
+//-w3-              increases -- might be interesting to see those tabulated against
+//-w3-              one another for meta-cycles
+//-w3-
+//-w3-        if ( ndx % 3 ) {
+//-w3-            printf("%d\n", ndx % 5);
+//-w3-        }
+//-w3-         */
+//-w3-    }
+//-w3-
+//-w3-    //  Result
+//-w3-    printf("%d\n", sum );
+//-w3-    //  Check
+//-w3-    printf("%d\n", sum == 233168 );
+//-w3-
+//-w3-}
+//-w3-
+
+/* WORKS
+main()
+{
+    int ndx     =   0;
+    int sum     =   0;  
+    int LIMIT   =   1000;
+
+    while ( 1 ) {
         if ( ndx * 3 < LIMIT ) {
             sum += ndx * 3 ;
-            // printf("%d\n", ndx * 3 );
+            // printf("%d\n", ndx );
         } else {
             break;
         }
 
         if ( ndx * 5 < LIMIT && ( ndx * 5 ) % 3 != 0 ) {
             sum += ndx * 5 ;
-            // printf("%d\n", ndx * 5 );
-        } 
-    
+            // printf("%d\n", ndx );
+        }
+
         ndx++;
     }
 
-    printf("%d\n", sum);
-    //  Gives 233168, which is correct 
+    //  Result
+    printf("%d\n", sum );
+    //  Check
+    printf("%d\n", sum == 233168 );
 
 }
  */
-
 
 /* WORKS
 main()
 {
-    int ndx, sum, LIMIT;
-    
-    ndx     =   0;  
-    sum     =   0;  
-    LIMIT   =   1000;
-
-    while ( ndx < LIMIT ) {
-
-        if ( ndx % 3 == 0  ) {
-            sum += ndx ;
-            // printf("%d\n", ndx );
-        }
-
-        if ( ndx % 5 == 0 && ndx % 3 != 0 ) {
-            sum += ndx ;
-            // printf("%d\n", ndx  );
-        } 
-    
-        ndx++;
-    }
-
-    if ( sum == 233168 ) {
-        printf("ok\n");
-    } else {
-        printf("%d is incorrect\n", sum );
-    }
-
-}
- */
-
-/*  WORKS
-main()
-{
-    int ndx, sum, LIMIT;
-    
-    ndx     =   0;  
-    sum     =   0;  
-    LIMIT   =   1000;
-
-    while ( ndx < LIMIT ) {
-        if ( ndx % 3 == 0  || ndx % 5 == 0) {
-            sum += ndx ;
-            // printf("%d\n", ndx );
-        }
-        ndx++;
-    }
-
-    if ( sum == 233168 ) {
-        printf("ok\n");
-    } else {
-        printf("%d is incorrect\n", sum );
-    }
-
-}
- */
-
-main()
-{
-    int ndx;
+    int ndx     =   0;
     int sum     =   0;  
     int LIMIT   =   1000;
 
-    for ( ndx = 0; ndx < LIMIT; ndx++ ) {
-        if ( ndx % 3 == 0  || ndx % 5 == 0) {
-            sum += ndx ;
-            // printf("%d\n", ndx );
+    while ( 1 ) {
+        if ( ndx * 3 < LIMIT ) {
+            sum += ndx * 3 ;
+            if ( ndx * 5 < LIMIT && ( ndx * 5 ) % 3 ) {
+                // works bc any value but zero is true
+            // if ( ndx * 5 < LIMIT && ( ndx * 5 ) % 3 != 0 ) {
+                sum += ndx * 5 ;
+            }
+        } else {
+            break;
         }
+
+        ndx++;
     }
 
-    if ( sum == 233168 ) {
-        printf("ok\n");
-    } else {
-        printf("%d is incorrect\n", sum );
-    }
+    //  Result
+    printf("%d\n", sum );
+    //  Check
+    printf("%d\n", sum == 233168 );
 
 }
+ */
