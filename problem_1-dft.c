@@ -20,6 +20,28 @@ Find the sum of all the multiples of 3 or 5 below 1000.
     operations to a variable in the if checks?  I thought C offered some way of
     doing that.
 
+
+    KEY OPTIMIZATION QUESTION
+
+    The two approaches are:
+    -   loop all integers under the limit, checking each for divisibility
+        -   loops 3x the integers, which means:
+        -   More addition operations -- 3x
+        -   More divisibility checks on numbers that won't match
+        -   per loop: 1 increment, 2 divisibility, 1 lesser than 
+        -   per hit: 1 addition
+    -   loop all integers until multiplication by the smallest dividend exceeds the limit
+        -   loops only those numbers divisible by one of the divisors
+        -   substitutes lesser than checks for divisibility checks 
+        -   requires an additional divisibility by lesser divisor check to avoid duplication
+        -   per loop: 1 increment, 2 lesser than, 1 divisibility 
+        -   per hit: 1 addition
+
+    If lesser than checks are no more expensive than divisibility checks, second approach will be faster
+    +   adds 1 check (divisibility) per loop
+    -   removes 1 lesser than
+    -   removes 2/3 of the loops
+
  */
 
 /*  WORKS   --  v1
