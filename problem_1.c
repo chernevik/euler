@@ -33,17 +33,23 @@ main()
     LIMIT   =   1000;
 
     while ( ++ndx < LIMIT ) {
-    //-1-no while ( ndx++ < LIMIT ) {
-    //-1-while ( ndx < LIMIT ) {
-        // printf("%d\n", ndx);
+        //  Note that putting the increment operator ++ before the variable
+        //  (e.g., ++ndx) causes it to act before the comparison operation.
+        //  Placing it after ('ndx++') causes action after the comparison.  The
+        //  latter causes the algorithm to fail, bc it means the value compared
+        //  for the loop condition isn't the same as the value used in the
+        //  loop.  Thus the last iteration of the loop compares 999 < 1000
+        //  (true), but uses 1000 for the loop internals (which the loop
+        //  condition is intended to prevent).  
+
+        //  In both cases, the value of variable is the same inside the loop,
+        //  as the increment operation occurs after the comparison operation.
+
         if ( !( ndx % 3 ) || !( ndx % 5 ) ) {
             // works bc % returns 0 if first argument divisible by second, 0 is
             // logical FALSE, so reversal by ! makes it TRUE
-        // if ( ndx % 3 == 0  || ndx % 5 == 0) {
             sum += ndx ;
-            // printf("%d\n", ndx );
         }
-        //-1- ndx++;
     }
 
     //  Result
