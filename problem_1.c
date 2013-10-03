@@ -9,34 +9,30 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
 main()
 {
-    int i, mult_3, mult_5, min_max, sum;
+    int ndx, sum, LIMIT;
     
-    i       =   0;
-    min_max =   0;
+    ndx     =   0;  
     sum     =   0;  
-    mult_3 = i * 3;
-    mult_5 = i * 5;
-    min_max = mult_3;
-    /* min_max = min(mult_3, mult_5); */
-    
-    while ( min_max < 1000 ) {
-        printf("%d\n", i);
-        printf("%d\n", mult_3);
-        printf("%d\n", mult_5);
-        printf("%d\n", sum);
-        printf("\n");
+    LIMIT   =   1000;
 
-        sum += mult_3;
-        if ( mult_5 < 1000 ) {
-            sum += mult_5;
-        };
+    while ( 1 ) {
+
+        if ( ndx * 3 < LIMIT ) {
+            sum += ndx * 3 ;
+            // printf("%d\n", ndx * 3 );
+        } else {
+            break;
+        }
+
+        if ( ndx * 5 < LIMIT && ( ndx * 5 ) % 3 != 0 ) {
+            sum += ndx * 5 ;
+            // printf("%d\n", ndx * 5 );
+        } 
     
-        i++;
-        mult_3 = i * 3;
-        mult_5 = i * 5;
-        min_max = mult_3;
-        /* min_max = min(mult_3, mult_5);   */
+        ndx++;
     }
 
-    printf("%d", sum);
+    printf("%d\n", sum);
+    //  Gives 233168, which is correct 
+
 }
