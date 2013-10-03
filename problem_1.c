@@ -7,6 +7,8 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
  */
 
+/*  WORKS
+
 main()
 {
     int ndx, sum, LIMIT;
@@ -34,5 +36,87 @@ main()
 
     printf("%d\n", sum);
     //  Gives 233168, which is correct 
+
+}
+ */
+
+
+/* WORKS
+main()
+{
+    int ndx, sum, LIMIT;
+    
+    ndx     =   0;  
+    sum     =   0;  
+    LIMIT   =   1000;
+
+    while ( ndx < LIMIT ) {
+
+        if ( ndx % 3 == 0  ) {
+            sum += ndx ;
+            // printf("%d\n", ndx );
+        }
+
+        if ( ndx % 5 == 0 && ndx % 3 != 0 ) {
+            sum += ndx ;
+            // printf("%d\n", ndx  );
+        } 
+    
+        ndx++;
+    }
+
+    if ( sum == 233168 ) {
+        printf("ok\n");
+    } else {
+        printf("%d is incorrect\n", sum );
+    }
+
+}
+ */
+
+/*  WORKS
+main()
+{
+    int ndx, sum, LIMIT;
+    
+    ndx     =   0;  
+    sum     =   0;  
+    LIMIT   =   1000;
+
+    while ( ndx < LIMIT ) {
+        if ( ndx % 3 == 0  || ndx % 5 == 0) {
+            sum += ndx ;
+            // printf("%d\n", ndx );
+        }
+        ndx++;
+    }
+
+    if ( sum == 233168 ) {
+        printf("ok\n");
+    } else {
+        printf("%d is incorrect\n", sum );
+    }
+
+}
+ */
+
+main()
+{
+    int ndx;
+    int sum     =   0;  
+    int LIMIT   =   1000;
+
+    for ( ndx = 0; ndx < LIMIT; ndx++ ) {
+        if ( ndx % 3 == 0  || ndx % 5 == 0) {
+            sum += ndx ;
+            // printf("%d\n", ndx );
+        }
+    }
+
+    if ( sum == 233168 ) {
+        printf("ok\n");
+    } else {
+        printf("%d is incorrect\n", sum );
+    }
 
 }
