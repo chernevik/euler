@@ -23,46 +23,6 @@ int fibonacci(int first, int second)
     return nxt;
 }
 
-void fibonacci_sequence(int first, int second, int max)
-/*
-    Prints out terms of Fibonacci sequence, stopping when term exceeds max value
- */
-{
-    int nxt;
-
-    printf("%d\n", first);
-    printf("%d\n", second);
-
-    while ( ( nxt = fibonacci(first, second) ) < max ) {
-        printf("%d\n", nxt);
-        first = second;
-        second = nxt;
-    }  
-}  
-
-void fibonacci_even(int first, int second, int max)
-/*
-    Prints out even terms of Fibonacci sequence, stopping when term exceeds max value
- */
-{
-    int nxt;
-
-    if ( first % 2 == 0 ) {
-        printf("%d\n", first);
-    }
-    if ( second % 2 == 0 ) {
-        printf("%d\n", second);
-    }
-
-    while ( ( nxt = fibonacci(first, second) ) < max ) {
-        /* Check for even */
-        if ( nxt % 2 == 0 ) {
-            printf("%d\n", nxt);
-        }
-        first = second;
-        second = nxt;
-    }  
-}  
 
 int sum_fibonacci_even(int first, int second, int max)
 /*
