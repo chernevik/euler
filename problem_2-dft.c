@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 /*
 
@@ -119,11 +120,17 @@ main()
 
  */
 
-void fibonacci_ry(int first, int second, int max)
+int (*fibonacci_ry(int first, int second, int max))[10]
 /*
-    Returns an array whose contents are the elements of the Fibonacci sequence.
+    Returns a pointer to an array whose contents are the elements of the Fibonacci sequence.
 
     NOTE: Currently sequence length is constrained by hard code in function.
+
+    WARNING
+    Works, but gets warning:
+        warning: assignment from incompatible pointer type [enabled by default]
+
+    Answer may be in http://stackoverflow.com/questions/6474104/difference-between-pointer-to-pointer-and-pointer-to-array
 
  */
 {
@@ -131,29 +138,40 @@ void fibonacci_ry(int first, int second, int max)
         Create array, pointer to array, per K&R 82
      */
     int ndx = 0;
-    int nxt;
+    int nxt = 0;
     int SEQUENCE_LENGTH = 10;
     int sq[SEQUENCE_LENGTH];
     int *p_sq;
-    p_sq = &sq[0];
 
     sq[ndx] = first;
     ndx++;
     sq[ndx] = second;
+    ndx++;
 
     //  Put terms in array
-    while ( nxt < max || ndx < SEQUENCE_LENGTH ) {
+    while ( ( nxt < max ) && ( ndx <= SEQUENCE_LENGTH - 1 ) ) {
         nxt = fibonacci(first, second);
-        if ( nxt < max || ndx < SEQUENCE_LENGTH ) {
+        if ( ( nxt < max ) && ( ndx <=  SEQUENCE_LENGTH - 1 ) ) {
             sq[ndx] = nxt;
         }
-        second = nxt;
         first = second;
+        second = nxt;
         ndx++;
     }
 
+    p_sq = sq;
     return p_sq;
 
 }  
 
-// how to loop the array to print out contents?
+main()
+{
+    int *p_ry;
+    int i;
+
+    p_ry = fibonacci_ry(1, 2, 1000000);
+
+    for ( i = 0; i < 10; i++ ) {
+        printf("%d\n", *(p_ry + i));
+    }
+}
