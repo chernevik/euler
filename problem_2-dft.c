@@ -93,6 +93,7 @@ int sum_fibonacci_even(int first, int second, int max)
     return total;
 }  
 
+/*
 main()
 {
     // fibonacci_sequence(1, 2, 100);
@@ -100,6 +101,7 @@ main()
     val = sum_fibonacci_even(1, 2, 4000000);
     printf("%d\n", val);
 }
+ */
 
 /*
   A better solution would use a Fibonacci generator that returns a pointer to an array of the terms of the sequence.  This would allow for more elegant code generating the sequence, and more elegant code checking terms for even status.
@@ -116,3 +118,42 @@ main()
 
 
  */
+
+void fibonacci_ry(int first, int second, int max)
+/*
+    Returns an array whose contents are the elements of the Fibonacci sequence.
+
+    NOTE: Currently sequence length is constrained by hard code in function.
+
+ */
+{
+    /*
+        Create array, pointer to array, per K&R 82
+     */
+    int ndx = 0;
+    int nxt;
+    int SEQUENCE_LENGTH = 10;
+    int sq[SEQUENCE_LENGTH];
+    int *p_sq;
+    p_sq = &sq[0];
+
+    sq[ndx] = first;
+    ndx++;
+    sq[ndx] = second;
+
+    //  Put terms in array
+    while ( nxt < max || ndx < SEQUENCE_LENGTH ) {
+        nxt = fibonacci(first, second);
+        if ( nxt < max || ndx < SEQUENCE_LENGTH ) {
+            sq[ndx] = nxt;
+        }
+        second = nxt;
+        first = second;
+        ndx++;
+    }
+
+    return p_sq;
+
+}  
+
+// how to loop the array to print out contents?
