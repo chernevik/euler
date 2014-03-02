@@ -35,6 +35,24 @@ void print_list() {
     }
 }
 
+int return_list() {
+/*
+    Demonstrates return of pointer to a list
+
+ */
+    int i, j;
+    int ary[10];
+
+    // initialize array values
+    for (i=0; i<10; i++) 
+    {
+        ary[i] = i * 2;
+    }
+
+    // how do i return a pointer to this array?
+}
+
 void main() {
     print_list();
 }
+
