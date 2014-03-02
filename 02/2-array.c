@@ -1,6 +1,4 @@
-/*  STATUS -- NOT WORKING
-    - compiler generates warnings
-    - program output is gibberish
+/*  STATUS -- Printing list of Fibonacci sequence up to 100
 */
 
 /*  MOTIVATION
@@ -53,61 +51,61 @@ int fibonacci(int first, int second)
 
  */
 
-char (*fibonacci_ry(int first, int second, int max))[100]
-//-int (*fibonacci_ry(int first, int second, int max))[100]
+
+int* fibonacci_ry(int first, int second, int max)
 /*
     Returns a pointer to an array whose contents are the elements of the
-    Fibonacci sequence.
+    Fibonacci sequence less than value 'max'.
 
     NOTE: Currently sequence length is constrained by hard code in function.
 
-    WARNING
-    Works, but gets warning:
-        warning: assignment from incompatible pointer type [enabled by default]
-
-    Answer may be in
-    http://stackoverflow.com/questions/6474104/difference-between-pointer-to-pointer-and-pointer-to-array
+    weed: currently, returned array has zeroes for items after the last Fibonacci sequence value.  How to revise to return array that has only the Fibonacci values, and no zeroes?
 
  */
 {
-    /*
-        Create array, pointer to array, per K&R 82
-     */
     int ndx = 0;
     int nxt = 0;
     int SEQUENCE_LENGTH = 100;
-    int sq[SEQUENCE_LENGTH];
-    int *p_sq;
+    int* p_sq = malloc(sizeof(int) * SEQUENCE_LENGTH);
 
-    sq[ndx] = first;
+    p_sq[ndx] = first;
     ndx++;
-    sq[ndx] = second;
+    p_sq[ndx] = second;
     ndx++;
 
     //  Put terms in array
     while ( ( nxt < max ) && ( ndx <= SEQUENCE_LENGTH - 1 ) ) {
         nxt = fibonacci(first, second);
         if ( ( nxt < max ) && ( ndx <=  SEQUENCE_LENGTH - 1 ) ) {
-            sq[ndx] = nxt;
+            p_sq[ndx] = nxt;
         }
         first = second;
         second = nxt;
         ndx++;
     }
 
-    p_sq = sq;
     //return *p_sq;
     return p_sq;
 }  
 
 main()
+/*
+    Prints Fibonacci sequence from 1 to less than 100.
+
+    Does so from generated array of Fibonacci values.
+
+ */
 {
     int *p_ry;
-    int i;
+    int i = 0;
+    int val;
 
     p_ry = fibonacci_ry(1, 2, 100);
 
-    for ( i = 0; i < 100; i++ ) {
-        printf("%d\n", *(p_ry + i));
+    // Both work
+    while ( ( ( val = p_ry[i] ) < 100 ) && val > 0 ) {
+    //-while ( ( ( val = *(p_ry + i) ) < 100 ) && val > 0 ) {
+        printf("%d\n", val);
+        i++;
     }
 }
