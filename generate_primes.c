@@ -80,6 +80,7 @@ To do:
 
 PATH:
 - write function that prints out list of primes
+    see print_prime_list.c
 - write function that calls a prime list generation function and prints its output
     - extend first function to return a pointer to an array of primes
     - write function taking that pointer and iterating the list pointed to
