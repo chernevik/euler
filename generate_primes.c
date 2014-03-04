@@ -35,16 +35,119 @@ http://stackoverflow.com/questions/1453410/declaring-a-c-function-to-return-an-a
 
 NUMBER_OF_PRIMES = 10000
 
-int (*prime_list(int n)) {
+int size(ry)
+/* 
+    Returns length of array
+    - assumes array ends on -1 value
+{
+    int i = 0;
+
+    while ry[i] != -1
+    {
+        i++;
+    }
+
+    return i + 1;
+}
+
+int* merge_sorted(int* l1, int* l2)  // what is syntanx for taking pointer argument?
+/* Takes two sorted arrays (ascending) and combines them into one sorted array
+ */
+{
+    // weed: how do i iterate an array of unknown length?
+   /*
+        Keys here:
+        - figure out looping arrays of unknown size
+            - must end array with some known not-good value -- 0, or -1
+        - resizing output array to be large enough but no larger
+            - how to dynamically resize an array?
+    */
+
+    int i, j, k=0;
+    int size_l1, size_l2;
+
+    size_l1 = size(l1);
+    size_l2 = size(l2);
+
+    int* new_ry[size_l1 + size_l2];     // how to size this?
+    /*
+        strategy:
+        iterate items in one list, for each taking items from other list until finding one equal or greater
+     */
+
+    // process all l1 elements
+    while l1[i] != -1
+    {
+        while l2[j] != -1 && l2[j] <= l1[i] 
+        {
+            new_ry[k] = l2[j];
+            j++;
+            k++;
+        }
+        new_ry[k] = l1[i];
+        i++;
+        k++;
+    }
+
+    // check for end of l2; if not, process remaining l2 elements
+    while l2[j] != -1
+    {
+        new_ry[k] = l2[j];
+        j++;
+        k++;
+    }
+
+    //  add end of array value
+    k++;
+    new_ry[k] = -1;
+    return new_ry;
+
+}
+
+
+
+int* prime_list(int n) {
 /* 
     Returns pointer to array listing primes less than n
     Algorithm is Sieve of Eratosthenes
  */
 
-    // weed: i am not sure what this does or if it is even proper syntax
-    int (*primeArr)[NUMBER_OF_PRIMES] = malloc(sizeof *primeArr * n);
+    // create counter variables;
+    int i, j, k;
+    // create array to hold primes and to be returned
+    int* primeArr = malloc(sizeof(int) * n);
 
     // initialize primeArr values
+
+    int candidates[n];  // initialization of candidates array -- syntax?
+    int not_primes[n];  // initialization of not_primes -- syntax?
+    int primes[n];  // initialization of primes -- syntax?
+
+    // populate candidates
+
+    for ( i = 2; i < n; i++ ) {
+        candidates[i-2] = i;
+    }
+
+    // populate not_candidates
+    // it's all gibberish just yet
+    /*
+        - how to iterate candidates
+        - populate not_primes
+     */
+
+    k = 0;
+    for ( j = 0; j - 2 < n; j++ ) {
+        // must add first candidate value to primes array
+        candidate = candidates[j];
+        // puts not candidates numbers in array, but must be synced with the prior not candidates in array
+        while ( val = candidates * k ) < n {
+            k_candidates[k] = val;
+            k++;
+        }
+        k_candidates[k] = -1;
+        not_candidates = merge_sorted(not_candidates, k_candidates);
+    }
 
     /*
         PROCEDURE:
