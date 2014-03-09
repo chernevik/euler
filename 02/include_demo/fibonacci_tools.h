@@ -1,13 +1,4 @@
-int fibonacci(int first, int second)
-/*
-    Returns the next Fibonacci term, given first and second
-*/
-{
-    int nxt;
-    nxt = first + second;
-    return nxt;
-}
-
+#include "../fibonacci.h"
 
 int sum_fibonacci_even(int first, int second, int max_term)
 /*

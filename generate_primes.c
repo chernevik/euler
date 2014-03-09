@@ -140,6 +140,9 @@ int* prime_list(int n) {
     for ( j = 0; j - 2 < n; j++ ) {
         // must add first candidate value to primes array
         candidate = candidates[j];
+        // check if candidate is in not_primes; if not, put in primes
+        // if in not_primes, skip
+        
         // puts not candidates numbers in array, but must be synced with the prior not candidates in array
         while ( val = candidates * k ) < n {
             k_candidates[k] = val;
