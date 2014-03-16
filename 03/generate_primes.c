@@ -103,7 +103,6 @@ int* merge_sorted(int *l1, int *l2)  // what is syntanx for taking pointer argum
     }
 
     //  add end of array value
-    k++;
     new_ry[k] = -1;
     return new_ry;
 
