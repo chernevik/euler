@@ -11,6 +11,8 @@ MOTIVATION:
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "generate_primes.c"
+
 int* return_list() {
 /*
     Demonstrates return of pointer to a list
@@ -30,13 +32,21 @@ int* return_list() {
 };
 
 void main() {
+    /* prints a list of prime numbers
+
+        STATUS
+        segmentation fault
+    */
+
     int *p_ry;
     int j = 0;
     int val;
 
-    p_ry = return_list();
-    for ( j=0; j < 10; j++ ) {
+    p_ry = prime_list(10);
+    //-p_ry = return_list();
+    while ( p_ry[j] != -1 ) {
         printf("%d\n", p_ry[j]);
+        j++;
     }
 }
 
