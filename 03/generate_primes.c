@@ -31,6 +31,7 @@ http://stackoverflow.com/questions/1453410/declaring-a-c-function-to-return-an-a
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 //-4-int NUMBER_OF_PRIMES = 10000;
 
@@ -63,13 +64,16 @@ int* merge_sorted(int *l1, int *l2)  // what is syntanx for taking pointer argum
             - how to dynamically resize an array?
     */
 
-    int i, j, k=0;
+    int i=0;
+    int j=0;
+    int k=0;
     int size_l1, size_l2;
 
     size_l1 = size(l1);
     size_l2 = size(l2);
 
-    int* new_ry[size_l1 + size_l2];     // how to size this?
+    int* new_ry = malloc(sizeof(int) * (size_l1 + size_l2) );     // how to size this?
+    //-int new_ry[size_l1 + size_l2];     // how to size this?
     /*
         strategy:
         iterate items in one list, for each taking items from other list until finding one equal or greater
@@ -81,7 +85,7 @@ int* merge_sorted(int *l1, int *l2)  // what is syntanx for taking pointer argum
         while ( l2[j] != -1 && l2[j] <= l1[i] )
         {
             new_ry[k] = l2[j];
-            /* gets warning, 'assignment makes pointer from integer without a cast'
+            /* gets warning, 'assignment makes pointer from integer without a cast' */
             j++;
             k++;
         }
