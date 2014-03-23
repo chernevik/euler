@@ -113,80 +113,78 @@ int* prime_list(int n) {
 /* 
     Returns pointer to array listing primes less than n
     Algorithm is Sieve of Eratosthenes
+
+
+    STATUS:
+    - returns segmentation fault on execution
+    - I suspect the issue is related to usage of merge_sorted
+
  */
 
     // create counter variables;
-    int i, j, k;
-    int prime_ndx = 0;
+    int i, j, k, l;
+    int pA_ndx = 0;
+
     // create array to hold primes and to be returned
-    int* primeArr = malloc(sizeof(int) * n);
+    int* primeArr = malloc(sizeof(int) * ( n + 1 ) );
+
+    int candidates[n];
+    int *not_primes;
+    int multiples[n];
+    int val, np_val, val_multiple;
+
+    // Return basic list -- to establish proper pointer handling
+
+//-w-    // initialize array values
+//-w-    for (i=0; i<n; i++) 
+//-w-    {
+//-w-        primeArr[i] = i * 2;
+//-w-    }
+//-w-
+//-w-    // Send end of array value
+//-w-    primeArr[n] = -1;
+//-w-
 
     // initialize primeArr values
 
-    int candidates[n];  // initialization of candidates array -- syntax?
-    int candidate;
-    int val;
-    //-int *not_primes ;  
-    int* not_primes = malloc(sizeof(int) * n);
-    // int not_primes[n];  
-        // initialization of not_primes -- syntax?
-    //- int not_candidates[n];  
-    /* get incompatible type error
-                                must be able to receive array in assignment
-                             */
     // populate candidates
 
-    for ( i = 2; i < n; i++ ) {
+    for ( int i = 2; i < n; i++ ) {
         candidates[i-2] = i;
     }
 
+    i++;
     candidates[i-2] = -1;
     
-    for ( j = 0; j < n; j++ ) {
-        // must add first candidate value to primes array
-        candidate = candidates[j];
-        // check if candidate is in not_primes; if not, put in primes
-        // if in not_primes, skip
-        
+    // Scan candidates for prime possibility
+    while ( ( val = candidates[j] ) != -1 ) {
+        // check if val is in not_primes
         int prime_flag = 1;
-        int l;
-        for ( l=0; l < n; l++ ) {
-            if ( ( not_primes[l] = candidate ) ) {
+        int k = 0;
+        while ( ( np_val = not_primes[k] ) >= val ) {
+            if ( np_val == val ) {
                 prime_flag = 0;
             }
         }
 
+        // if val is not in not_primes, put in prime, and put multiples of val in not_prime 
         if ( prime_flag == 1 ) {
-            primeArr[prime_ndx] = candidate;
-            prime_ndx++;
+            primeArr[pA_ndx] = val;
+            pA_ndx++;
+
+            // collect multiples of val less than or equal to n
+            int l = 0;
+            while ( ( val_multiple = l * val ) <= n ) {
+                multiples[l] = val_multiple;
+            }
+
+            // merge multiples with not_primes
+            // suspect that segmentation fault is related to this line
+            not_primes = merge_sorted(not_primes, multiples);
         }
 
-        // put multiples of that prime into an array, to be merged with not_primes
-        int k = 2;
-        int candidate_multiples[n];
-        while ( ( val = candidate * k ) < n ) {
-            candidate_multiples[k-2] = val;
-            k++;
-        }
-        candidate_multiples[k] = -1;
-        not_primes = merge_sorted(not_primes, candidate_multiples);
     }
 
-    /*
-        PROCEDURE:
-        - create list of integers, 'candidates', up to n 
-        - let p = 2
-        - put p in list of primes
-        - enumerate multiples of p less than n, putting these in list of not-primes
-        - the first value in candidates, which is greater than p, and which is not in the list of not-primes, is itself prime
-            - if there is no such value, stop algorithm; otherwise,
-            - put this value in list of primes
-            - set p equal to this value and repeat process from enumeration step
-
-
-     */
-
-    // return array
     return primeArr;
 
 }
