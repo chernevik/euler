@@ -151,14 +151,15 @@ int* prime_list(int n) {
         int prime_flag = 1;
         int l;
         for ( l=0; l < n; l++ ) {
-            if ( not_primes[l] = candidate ) {
+            if ( ( not_primes[l] = candidate ) ) {
                 prime_flag = 0;
             }
         }
 
-        if ( prime_flag == 1 ) ;
+        if ( prime_flag == 1 ) {
             primeArr[prime_ndx] = candidate;
             prime_ndx++;
+        }
 
         // put multiples of that prime into an array, to be merged with not_primes
         int k = 2;

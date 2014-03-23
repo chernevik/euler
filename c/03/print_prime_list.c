@@ -31,7 +31,7 @@ int* return_list() {
     // how do i return a pointer to this array?
 };
 
-void main() {
+int main() {
     /* prints a list of prime numbers
 
         STATUS
