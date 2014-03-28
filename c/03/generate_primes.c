@@ -109,8 +109,56 @@ int* merge_sorted(int *l1, int *l2)  // what is syntanx for taking pointer argum
 }
 
 
-int* prime_list(int n) {
+int *return_list() {
+/*
+    Demonstrates return of pointer to a list
+
+ */
+
+    int i, j;
+    int* ary = malloc(sizeof(int) * ( 10 + 1 ) );
+
+    // initialize array values
+    for (i=0; i<10; i++) 
+    {
+        ary[i] = i * 2;
+    }
+
+    // Send end of array value
+    ary[11 - 1] = -1;
+
+    // Return pointer to array
+    return ary;
+    
+};
+
+
+int *prime_list() {
+/*
+    Demonstrates return of pointer to a list
+
+ */
+
+    int i, j;
+    int* ary = malloc(sizeof(int) * ( 10 + 1 ) );
+
+    // initialize array values
+    for (i=0; i<10; i++) 
+    {
+        ary[i] = i * 2;
+    }
+
+    // Send end of array value
+    ary[11 - 1] = -1;
+
+    // Return pointer to array
+    return ary;
+    
+};
+int *prime_list_seg_fault(int n) {
 /* 
+    This code segment faults.
+
     Returns pointer to array listing primes less than n
     Algorithm is Sieve of Eratosthenes
 
@@ -126,7 +174,8 @@ int* prime_list(int n) {
     int pA_ndx = 0;
 
     // create array to hold primes and to be returned
-    int* primeArr = malloc(sizeof(int) * ( n + 1 ) );
+    int *primeArr;
+    primeArr = malloc(sizeof(int) * ( n + 1 ) );
 
     int candidates[n];
     int *not_primes;
@@ -149,7 +198,7 @@ int* prime_list(int n) {
 
     // populate candidates
 
-    for ( int i = 2; i < n; i++ ) {
+    for ( i = 2; i < n; i++ ) {
         candidates[i-2] = i;
     }
 

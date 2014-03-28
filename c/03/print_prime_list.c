@@ -13,7 +13,8 @@ MOTIVATION:
 
 #include "generate_primes.c"
 
-int* return_list() {
+int *return_list() {
+//-int* return_list() {
 /*
     Demonstrates return of pointer to a list
 
