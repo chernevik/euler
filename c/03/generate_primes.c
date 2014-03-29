@@ -157,9 +157,7 @@ int *prime_list(int n) {
      */
 
     int candidates[n];
-    int *not_prime_swap;
     int not_prime[n];
-    int not_prime_addition[n];
     int prime[n];
 
     // initialize candidate array values
@@ -181,59 +179,71 @@ int *prime_list(int n) {
     not_prime[i] = -1;
 
     /*
+     */
     printf("contents of not_prime\n");
     i=0;
     while ((val=not_prime[i++])!=-1) {printf("%d\n", val);}
     printf("done \n");
-     */
 
 
     // start algorithm
-    int prime_candidate = candidates[candidates_ndx];  // value is 2
-    candidates_ndx++;
-
-    // check for presence in not_prime
-    int is_prime = 1;
-
-    i = 0;
-    while ( ( val = not_prime[i] ) != 1 && is_prime == 1 ) {
-        if ( val == prime_candidate ) {
-            is_prime = 0;
+    while ( ( val = candidates[candidates_ndx] ) != -1 ) {
+        printf("candidate: %d\n", val);
+        int prime_candidate = candidates[candidates_ndx];  // value is 2
+        candidates_ndx++;
+    
+        // check for presence in not_prime
+        int is_prime = 1;
+    
+        i = 0;
+        while ( ( val = not_prime[i] ) != -1 && is_prime == 1 ) {
+            printf("val is %d\n", val);
+            printf("is_prime is %d\n", is_prime);
+            if ( val == prime_candidate ) {
+                is_prime = 0;
+                printf("candidate %d is not prime\n", val);
+            }
+            i++;
         }
-        i++;
+    
+        if ( is_prime == 0 ) {
+            continue;
+        }
+
+        // put multiples of this prime number in not_prime
+        int not_prime_addition[n];
+        for ( i=2; ( val = prime_candidate * i ) < n; i++ ) {
+            not_prime_addition[i-2] = val;
+        }
+        not_prime_addition[i-2] = -1;
+    
+        /*
+        printf("contents of not_prime_addition\n");
+        i=0;
+        while ((val=not_prime_addition[i++])!=-1) {printf("%d\n", val);}
+        printf("done \n");
+         */
+    
+    
+        int *not_prime_swap;
+        not_prime_swap = merge_sorted(not_prime, not_prime_addition);
+    
+        i = 0;
+        while ( ( val = not_prime_swap[i] ) != -1) 
+        {
+            not_prime[i] = val;
+            i++;
+        }
+        // catch -1 value
+        not_prime[i] = not_prime_swap[i]; 
+
+        /*
+         */
+        printf("contents of not_prime_swap\n");
+        i=0;
+        while ((val=not_prime_swap[i++])!=-1) {printf("%d\n", val);}
+        printf("done \n");
     }
-
-    // put multiples of this prime number in not_prime
-    for ( i=2; ( val = prime_candidate * i ) < n; i++ ) {
-        not_prime_addition[i-2] = val;
-    }
-    not_prime_addition[i-2] = -1;
-
-    /*
-    printf("contents of not_prime_addition\n");
-    i=0;
-    while ((val=not_prime_addition[i++])!=-1) {printf("%d\n", val);}
-    printf("done \n");
-     */
-
-
-    not_prime_swap = merge_sorted(not_prime, not_prime_addition);
-
-    i = 0;
-    while ( ( val = not_prime_swap[i] ) != -1) 
-    {
-        not_prime[i] = val;
-        i++;
-    }
-    // catch -1 value
-    not_prime[i] = not_prime_swap[i]; 
-
-    /*
-    printf("contents of not_prime_swap\n");
-    i=0;
-    while ((val=not_prime_swap[i++])!=-1) {printf("%d\n", val);}
-    printf("done \n");
-     */
 
     // show some array's values in primeAry
     i = 0;
