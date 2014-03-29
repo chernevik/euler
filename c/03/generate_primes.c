@@ -197,7 +197,8 @@ int *prime_list(int n) {
     while ( ( val = candidates[candidates_ndx] ) != -1 ) {
         printf("contents of candidates -- again\n");
         i=0;
-        while ((val=candidates[i++])!=-1) {printf("%d\n", val);}
+        int val2;
+        while ((val2=candidates[i++])!=-1) {printf("%d\n", val2);}
         printf("done \n");
 
         int prime_candidate = candidates[candidates_ndx];  // value is 2
@@ -207,11 +208,19 @@ int *prime_list(int n) {
         printf("prime_candidate is %d\n", prime_candidate);
         candidates_ndx++;
     
+        printf("contents of candidates -- again again\n");
+        i=0;
+        int val3;
+        while ((val3=candidates[i++])!=-1) {printf("%d\n", val3);}
+        printf("done \n");
+
         // check for presence in not_prime
         int is_prime = 1;
     
         i = 0;
         while ( ( val = not_prime[i] ) != -1 && is_prime == 1 ) {
+            // potential issue: the loop pulls values from not_prime, but it also changes the values of not_prime
+            // but these effects seem to be showing up in candidates?
             if ( val == prime_candidate ) {
                 is_prime = 0;
             }
@@ -225,7 +234,7 @@ int *prime_list(int n) {
             prime_ndx++;
         }
 
-        // put multiples of this prime number in not_prime
+        // put multiples of this prime number in not_prime_addition
         int not_prime_addition[n];
         for ( i=2; ( val = prime_candidate * i ) < n; i++ ) {
             not_prime_addition[i-2] = val;
@@ -244,6 +253,7 @@ int *prime_list(int n) {
         not_prime_swap = merge_sorted(not_prime, not_prime_addition);
     
         i = 0;
+        // something in here changes the values in array candidates
         while ( ( val = not_prime_swap[i] ) != -1) 
         {
             not_prime[i] = val;
@@ -251,6 +261,12 @@ int *prime_list(int n) {
         }
         // catch -1 value
         not_prime[i] = not_prime_swap[i]; 
+
+        printf("contents of candidates -- again 4\n");
+        i=0;
+        int val4;
+        while ((val4=candidates[i++])!=-1) {printf("%d\n", val4);}
+        printf("done \n");
 
         /*
         printf("contents of not_prime_swap\n");
@@ -286,89 +302,6 @@ int *prime_list(int n) {
 };
 
 
-/*--------------------------------------------------------------------------*/
-int *prime_list_seg_fault(int n) {
-/* 
-    This code segment faults.
-
-    Returns pointer to array listing primes less than n
-    Algorithm is Sieve of Eratosthenes
-
-
-    STATUS:
-    - returns segmentation fault on execution
-    - I suspect the issue is related to usage of merge_sorted
-
- */
-
-    // create counter variables;
-    int i, j, k, l;
-    int pA_ndx = 0;
-
-    // create array to hold primes and to be returned
-    int *primeArr;
-    primeArr = malloc(sizeof(int) * ( n + 1 ) );
-
-    int candidates[n];
-    int *not_primes;
-    int multiples[n];
-    int val, np_val, val_multiple;
-
-    // Return basic list -- to establish proper pointer handling
-
-//-w-    // initialize array values
-//-w-    for (i=0; i<n; i++) 
-//-w-    {
-//-w-        primeArr[i] = i * 2;
-//-w-    }
-//-w-
-//-w-    // Send end of array value
-//-w-    primeArr[n] = -1;
-//-w-
-
-    // initialize primeArr values
-
-    // populate candidates
-
-    for ( i = 2; i < n; i++ ) {
-        candidates[i-2] = i;
-    }
-
-    i++;
-    candidates[i-2] = -1;
-    
-    // Scan candidates for prime possibility
-    while ( ( val = candidates[j] ) != -1 ) {
-        // check if val is in not_primes
-        int prime_flag = 1;
-        int k = 0;
-        while ( ( np_val = not_primes[k] ) >= val ) {
-            if ( np_val == val ) {
-                prime_flag = 0;
-            }
-        }
-
-        // if val is not in not_primes, put in prime, and put multiples of val in not_prime 
-        if ( prime_flag == 1 ) {
-            primeArr[pA_ndx] = val;
-            pA_ndx++;
-
-            // collect multiples of val less than or equal to n
-            int l = 0;
-            while ( ( val_multiple = l * val ) <= n ) {
-                multiples[l] = val_multiple;
-            }
-
-            // merge multiples with not_primes
-            // suspect that segmentation fault is related to this line
-            not_primes = merge_sorted(not_primes, multiples);
-        }
-
-    }
-
-    return primeArr;
-
-}
 /*--------------------------------------------------------------------------*/
     
 
