@@ -179,16 +179,15 @@ int *prime_list(int n) {
     not_prime[i] = -1;
 
     /*
-     */
     printf("contents of not_prime\n");
     i=0;
     while ((val=not_prime[i++])!=-1) {printf("%d\n", val);}
     printf("done \n");
+     */
 
 
     // start algorithm
     while ( ( val = candidates[candidates_ndx] ) != -1 ) {
-        printf("candidate: %d\n", val);
         int prime_candidate = candidates[candidates_ndx];  // value is 2
         candidates_ndx++;
     
@@ -197,11 +196,8 @@ int *prime_list(int n) {
     
         i = 0;
         while ( ( val = not_prime[i] ) != -1 && is_prime == 1 ) {
-            printf("val is %d\n", val);
-            printf("is_prime is %d\n", is_prime);
             if ( val == prime_candidate ) {
                 is_prime = 0;
-                printf("candidate %d is not prime\n", val);
             }
             i++;
         }
@@ -238,11 +234,11 @@ int *prime_list(int n) {
         not_prime[i] = not_prime_swap[i]; 
 
         /*
-         */
         printf("contents of not_prime_swap\n");
         i=0;
         while ((val=not_prime_swap[i++])!=-1) {printf("%d\n", val);}
         printf("done \n");
+         */
     }
 
     // show some array's values in primeAry
