@@ -56,19 +56,3 @@ int *list_primes(int n)
 }
 
 
-int main()
-/*
-    Outputs list_primes() contents.
-
- */
-{
-    int *prime_list;    
-    int j = 0;
-    int val;
-
-    prime_list = list_primes(20);
-    while ( ( val = prime_list[j] ) != -1 ) {
-        printf("%d\n", val);
-        j++;
-    }
-}
