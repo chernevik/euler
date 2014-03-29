@@ -13,30 +13,6 @@ MOTIVATION:
 
 #include "generate_primes.c"
 
-int *return_list() {
-//-int* return_list() {
-/*
-    Demonstrates return of pointer to a list
-
- */
-
-    int i, j;
-    int* ary = malloc(sizeof(int) * ( 10 + 1 ) );
-
-    // initialize array values
-    for (i=0; i<10; i++) 
-    {
-        ary[i] = i * 2;
-    }
-
-    // Send end of array value
-    ary[11 - 1] = -1;
-
-    // Return pointer to array
-    return ary;
-    
-};
-
 int main() {
     /* prints a list of prime numbers
 

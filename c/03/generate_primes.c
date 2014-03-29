@@ -35,6 +35,7 @@ http://stackoverflow.com/questions/1453410/declaring-a-c-function-to-return-an-a
 
 int NUMBER_OF_PRIMES = 10000;
 
+/*--------------------------------------------------------------------------*/
 int size(int *ry)
 /* 
     Returns length of array
@@ -51,6 +52,7 @@ int size(int *ry)
     return i + 1;
 }
 
+/*--------------------------------------------------------------------------*/
 int* merge_sorted(int *l1, int *l2)  // what is syntanx for taking pointer argument?  or array argument?
 /* Takes two sorted arrays (ascending) and combines them into one sorted array
  */
@@ -109,6 +111,7 @@ int* merge_sorted(int *l1, int *l2)  // what is syntanx for taking pointer argum
 }
 
 
+/*--------------------------------------------------------------------------*/
 int *return_list() {
 /*
     Demonstrates return of pointer to a list
@@ -133,28 +136,132 @@ int *return_list() {
 };
 
 
-int *prime_list() {
+/*--------------------------------------------------------------------------*/
+int *prime_list(int n) {
 /*
-    Demonstrates return of pointer to a list
+    Returns a pointer to an incomplete list of not primes
 
  */
 
-    int i, j;
-    int* ary = malloc(sizeof(int) * ( 10 + 1 ) );
+    int i, val;
+    int candidates_ndx = 0;
+    int *primeAry = calloc(n+1, sizeof(int));
+    //-int *primeAry = malloc(sizeof(int) * ( n + 1 ) );
+    primeAry[n] = -1;
 
-    // initialize array values
-    for (i=0; i<10; i++) 
+    /*
+    printf("contents of primeAry\n");
+    i=0;
+    while ((val=primeAry[i++])!=-1) {printf("%d\n", val);}
+    printf("done primeAry\n");
+     */
+
+    int candidates[n];
+    int *not_prime_swap;
+    int not_prime[n];
+    int not_prime_addition[n];
+    int prime[n];
+
+    // initialize candidate array values
+    for (i=0; i+2 < n; i++) 
     {
-        ary[i] = i * 2;
+        candidates[i] = i+2; 
     }
 
-    // Send end of array value
-    ary[11 - 1] = -1;
+    // Set end of array value
+    candidates[i] = -1;
+
+    // initialize not prime array values
+    for (i=0; i < n; i++) 
+    {
+        not_prime[i] = 0; 
+    }
+
+    // Set end of not_prime array value
+    not_prime[i] = -1;
+
+    /*
+    printf("contents of not_prime\n");
+    i=0;
+    while ((val=not_prime[i++])!=-1) {printf("%d\n", val);}
+    printf("done \n");
+     */
+
+
+    // start algorithm
+    int prime_candidate = candidates[candidates_ndx];  // value is 2
+    candidates_ndx++;
+
+    // check for presence in not_prime
+    int is_prime = 1;
+
+    i = 0;
+    while ( ( val = not_prime[i] ) != 1 && is_prime == 1 ) {
+        if ( val == prime_candidate ) {
+            is_prime = 0;
+        }
+        i++;
+    }
+
+    // put multiples of this prime number in not_prime
+    for ( i=2; ( val = prime_candidate * i ) < n; i++ ) {
+        not_prime_addition[i-2] = val;
+    }
+    not_prime_addition[i-2] = -1;
+
+    /*
+    printf("contents of not_prime_addition\n");
+    i=0;
+    while ((val=not_prime_addition[i++])!=-1) {printf("%d\n", val);}
+    printf("done \n");
+     */
+
+
+    not_prime_swap = merge_sorted(not_prime, not_prime_addition);
+
+    i = 0;
+    while ( ( val = not_prime_swap[i] ) != -1) 
+    {
+        not_prime[i] = val;
+        i++;
+    }
+    // catch -1 value
+    not_prime[i] = not_prime_swap[i]; 
+
+    /*
+    printf("contents of not_prime_swap\n");
+    i=0;
+    while ((val=not_prime_swap[i++])!=-1) {printf("%d\n", val);}
+    printf("done \n");
+     */
+
+    // show some array's values in primeAry
+    i = 0;
+    while ( ( val = not_prime[i] ) != -1 ) 
+    //-for (i=0; i < n + 1; i++) 
+    {
+        /* inspection
+        printf("loopcheck\n");
+        printf("%d\n", i);
+        printf("%d\n", primeAry[i]);
+        printf("%d\n", val);
+        printf("%d\n", not_prime_swap[i]);
+        printf("donecheck\n");
+         */
+        primeAry[i] = not_prime[i]; 
+        i++;
+    }
+    // catch -1 value
+    primeAry[i] = not_prime[i]; 
 
     // Return pointer to array
-    return ary;
+
+    return primeAry;
     
 };
+
+
+/*--------------------------------------------------------------------------*/
 int *prime_list_seg_fault(int n) {
 /* 
     This code segment faults.
@@ -237,6 +344,7 @@ int *prime_list_seg_fault(int n) {
     return primeArr;
 
 }
+/*--------------------------------------------------------------------------*/
     
 
 /*
@@ -263,3 +371,4 @@ PATH:
 - then ready to return to 3.c to learn how to include prime list generation function in the 3.c file
 
  */
+/*--------------------------------------------------------------------------*/
