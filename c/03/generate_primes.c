@@ -160,6 +160,8 @@ int *prime_list(int n) {
     int not_prime[n];
     int prime[n];
 
+    int prime_ndx = 0;
+
     // initialize candidate array values
     for (i=0; i+2 < n; i++) 
     {
@@ -204,6 +206,9 @@ int *prime_list(int n) {
     
         if ( is_prime == 0 ) {
             continue;
+        } else {
+            prime[prime_ndx] = prime_candidate;
+            prime_ndx++;
         }
 
         // put multiples of this prime number in not_prime
@@ -243,7 +248,7 @@ int *prime_list(int n) {
 
     // show some array's values in primeAry
     i = 0;
-    while ( ( val = not_prime[i] ) != -1 ) 
+    while ( ( val = prime[i] ) != -1 ) 
     //-for (i=0; i < n + 1; i++) 
     {
         /* inspection
@@ -254,11 +259,11 @@ int *prime_list(int n) {
         printf("%d\n", not_prime_swap[i]);
         printf("donecheck\n");
          */
-        primeAry[i] = not_prime[i]; 
+        primeAry[i] = prime[i]; 
         i++;
     }
     // catch -1 value
-    primeAry[i] = not_prime[i]; 
+    primeAry[i] = prime[i]; 
 
     // Return pointer to array
 

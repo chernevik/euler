@@ -25,6 +25,7 @@ int main() {
     int val;
 
     p_ry = prime_list(10);
+    //-fails for 20-p_ry = prime_list(20);
     //-p_ry = return_list();
     while ( p_ry[j] != -1 ) {
         printf("%d\n", p_ry[j]);
