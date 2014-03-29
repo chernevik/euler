@@ -171,6 +171,11 @@ int *prime_list(int n) {
     // Set end of array value
     candidates[i] = -1;
 
+    printf("contents of candidates\n");
+    i=0;
+    while ((val=candidates[i++])!=-1) {printf("%d\n", val);}
+    printf("done \n");
+
     // initialize not prime array values
     for (i=0; i < n; i++) 
     {
@@ -190,7 +195,16 @@ int *prime_list(int n) {
 
     // start algorithm
     while ( ( val = candidates[candidates_ndx] ) != -1 ) {
+        printf("contents of candidates -- again\n");
+        i=0;
+        while ((val=candidates[i++])!=-1) {printf("%d\n", val);}
+        printf("done \n");
+
         int prime_candidate = candidates[candidates_ndx];  // value is 2
+        printf("candidates_ndx is %d\n", candidates_ndx);
+        printf("candidate is %d\n", val);
+        printf("candidate is %d\n", candidates[candidates_ndx]);
+        printf("prime_candidate is %d\n", prime_candidate);
         candidates_ndx++;
     
         // check for presence in not_prime

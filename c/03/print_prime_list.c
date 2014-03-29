@@ -24,7 +24,7 @@ int main() {
     int j = 0;
     int val;
 
-    p_ry = prime_list(10);
+    p_ry = prime_list(20);
     //-fails for 20-p_ry = prime_list(20);
     //-p_ry = return_list();
     while ( p_ry[j] != -1 ) {
