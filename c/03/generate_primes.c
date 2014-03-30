@@ -14,6 +14,8 @@ Bool is_prime(int n)
     Tests whether << n >> is prime
  */
 {
+//-1-    printf("entering is_prime for %d\n", n);
+
     int divisor;
 
     if (n <= 1) return FALSE;
@@ -21,9 +23,11 @@ Bool is_prime(int n)
     {
         if (n % divisor == 0) 
         {
+//-1-            printf("leaving false\n");
             return FALSE;
         }
     }
+//-1-    printf("leaving true \n");
     return TRUE;
 }
 

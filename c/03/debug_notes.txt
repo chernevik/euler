@@ -1,0 +1,13 @@
+following http://www.unknownroad.com/rtfm/gdbtut/gdbsegfault.html
+
+compile with -g flag
+    << gcc -g factorize.c >>
+
+open in debugger
+    gdb a.out
+
+in debugger:
+- run code:  << run >>
+- observe variables:
+    << print [variable name] >>
+

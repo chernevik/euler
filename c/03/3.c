@@ -10,6 +10,7 @@ PRIME FACTORIZATION PROCESS
     - This prime is a factor of the target
     - The number of times that prime divides into the target, I term 'the dividend'
 - If the dividend is not itself prime, find the prime factors of the dividend.  Each of these is a prime factor of the target.
+- If the dividend is itself prime, the dividend is a prime factor of the number.  (Yes?)
 
 Check a number for prime?
 - I don't know of any other way than either consult a list, or do prime factorization until the numer itself emerges in the sequence of primes
