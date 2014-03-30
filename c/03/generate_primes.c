@@ -60,3 +60,22 @@ int *list_primes(long int n)
 }
 
 
+long int next_prime(long int n)
+/*
+    Returns the next prime number after n.
+
+    STATUS Not working.
+
+ */
+{
+    long int j = n;
+    for (j = n+1; !is_prime(j); j++ ) {
+    }
+
+    // check
+    if (!is_prime(j)) {
+        printf("%ld is not a prime -- ERROR", j);
+    }
+    return j;
+}
+

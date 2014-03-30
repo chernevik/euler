@@ -1,11 +1,8 @@
 #include "generate_primes.c"
 
 //#define TARGET   13195
-//#define TARGET   60000000
 #define TARGET 600851475143
 //- 600,851,475,143
-// gets implicit conversion warning
-// seg faults on run
 
 
 int *factorize(long n)
@@ -29,6 +26,8 @@ int *factorize(long n)
         return factors;
     }
 
+    // this generates a lot of primes that aren't used -- costly
+    // revise to define and use a function that returns the next prime number?
     primes = list_primes(n/2);
 
     while ( ( val = primes[i++] ) != -1 && !dividend ) {
