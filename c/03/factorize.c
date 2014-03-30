@@ -19,7 +19,9 @@ int *factorize(long n)
     int *primes;
     int *dividend_factors;
     int *factors = calloc(n, sizeof(int));
-    int i=0, factors_ndx=0, dividend=0, j=0, df_val;
+    int i=0, factors_ndx=0, j=0, df_val;
+    long int dividend=0;
+    //-2-int i=0, factors_ndx=0, dividend=0, j=0, df_val;
     //-1-int i=0, val, factors_ndx=0, dividend=0, j=0, df_val;
 
     if (is_prime(n)) {
@@ -54,6 +56,21 @@ int *factorize(long n)
         }
     }
     factors[factors_ndx] = -1;
+
+    // add back check on factors
+    // add -- somewhere -- check to get maximum value
+
+    long int check_val = 1;
+    int k = 0;
+    while ( ( val = factors[k++] ) != -1 ) {
+        check_val = check_val * val;
+    }
+    if ( check_val != n ) {
+        printf("ERROR\n");
+        printf("%ld is not equal to \n", check_val);
+        printf("%ld", n);
+    }
+
     return factors;
 
 }
@@ -86,14 +103,9 @@ int main()
     - seems to be working
         gives 2, 2, 5 for 20
         gives 2, 2, 2, 5 for 40
-    - could use back-check -- does multiplication of factors return n?
 
-    BUT
-    - segfaults on problem #3 target value
-        - segfault resolved by specifying long int for arguments of is_prime, factorize
-        - still slow -- much faster on next_prime
-        - segfaulting
-    - very slow
+    - has back-check
+
 
 
  */
