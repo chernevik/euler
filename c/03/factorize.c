@@ -1,7 +1,7 @@
 #include "generate_primes.c"
 
-//#define TARGET   13195
-#define TARGET 600851475143
+//-#define TARGET   13195
+//-#define TARGET 600851475143
 //- 600,851,475,143
 
 
@@ -18,7 +18,8 @@ int *factorize(long n)
     int *primes;
     int *dividend_factors;
     int *factors = calloc(n, sizeof(int));
-    int i=0, val, factors_ndx=0, dividend=0, j=0, df_val;
+    int i=0, factors_ndx=0, dividend=0, j=0, df_val;
+    //-1-int i=0, val, factors_ndx=0, dividend=0, j=0, df_val;
 
     if (is_prime(n)) {
         factors[factors_ndx++] = n;
@@ -28,9 +29,16 @@ int *factorize(long n)
 
     // this generates a lot of primes that aren't used -- costly
     // revise to define and use a function that returns the next prime number?
-    primes = list_primes(n/2);
+    //-1-primes = list_primes(n/2);
 
-    while ( ( val = primes[i++] ) != -1 && !dividend ) {
+    /*
+        How to revise this to use next_prime(), rather than generating a long
+        list of primes?
+     */
+
+    long int val = 2;
+    while ( ( val = next_prime(val) ) != -1 && !dividend ) {
+    //-1-while ( ( val = primes[i++] ) != -1 && !dividend ) {
         if ( n % val == 0 ) {
             factors[factors_ndx++] = val;
             dividend = n / val;
