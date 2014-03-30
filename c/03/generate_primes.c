@@ -32,7 +32,7 @@ Bool is_prime(int n)
 }
 
 
-int *list_primes(int n)
+int *list_primes(long int n)
 /*
     Returns a pointer to an array of all primes less than equal to n.
 

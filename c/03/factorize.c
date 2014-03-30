@@ -1,7 +1,9 @@
 #include "generate_primes.c"
 
-#define TARGET   60000000
-//#define TARGET 600851475143
+//#define TARGET   13195
+//#define TARGET   60000000
+#define TARGET 600851475143
+//- 600,851,475,143
 // gets implicit conversion warning
 // seg faults on run
 
@@ -80,6 +82,8 @@ int main()
 
     BUT
     - segfaults on problem #3 target value
+        - segfault resolved by specifying long int for arguments of is_prime, factorize
+        - still slow
     - very slow
 
  */
