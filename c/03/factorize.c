@@ -16,30 +16,26 @@ int *factorize(n)
     int i=0, val, factors_ndx=0, dividend=0, j=0, df_val;
 
     if (is_prime(n)) {
-        factors[factors_ndx] = n;
+        factors[factors_ndx++] = n;
+        factors[factors_ndx] = -1;
         return factors;
     }
 
     primes = list_primes(n);
 
-    while ( ( val = primes[i] ) != -1 && !dividend ) {
+    while ( ( val = primes[i++] ) != -1 && !dividend ) {
         if ( n % val == 0 ) {
-            factors[factors_ndx] = val;
-            factors_ndx++;
+            factors[factors_ndx++] = val;
             dividend = n / val;
             if (!is_prime(dividend)) {
                 dividend_factors = factorize(dividend);
-                while ( ( df_val = dividend_factors[j] ) != -1 ) {
-                    factors[factors_ndx] = val;
-                    factors_ndx++;
-                    j++;
+                while ( ( df_val = dividend_factors[j++] ) != -1 ) {
+                    factors[factors_ndx++] = val;
                 }
             } else {
-                factors[factors_ndx] = dividend;
-                factors_ndx++;
+                factors[factors_ndx++] = dividend;
             }
         }
-        i++;
     }
     factors[factors_ndx] = -1;
     return factors;
