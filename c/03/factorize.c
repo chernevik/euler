@@ -1,7 +1,12 @@
 #include "generate_primes.c"
 
+#define TARGET   60000000
+//#define TARGET 600851475143
+// gets implicit conversion warning
+// seg faults on run
 
-int *factorize(n)
+
+int *factorize(long n)
 /*
     Returns pointer to array of prime factors of n.
 
@@ -9,6 +14,7 @@ int *factorize(n)
 
  */
 {
+    printf("entering factorize for %ld\n", n);
 
     int *primes;
     int *dividend_factors;
@@ -21,7 +27,7 @@ int *factorize(n)
         return factors;
     }
 
-    primes = list_primes(n);
+    primes = list_primes(n/2);
 
     while ( ( val = primes[i++] ) != -1 && !dividend ) {
         if ( n % val == 0 ) {
@@ -54,7 +60,7 @@ int main()
     int j = 0;
     int val;
 
-    prime_list = factorize(40);
+    prime_list = factorize(TARGET);
     //-prime_list = list_primes(20);
 
     while ( ( val = prime_list[j] ) != -1 ) {
@@ -70,5 +76,10 @@ int main()
     - seems to be working
         gives 2, 2, 5 for 20
         gives 2, 2, 2, 5 for 40
+    - could use back-check -- does multiplication of factors return n?
+
+    BUT
+    - segfaults on problem #3 target value
+    - very slow
 
  */
