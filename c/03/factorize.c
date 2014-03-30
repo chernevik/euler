@@ -1,6 +1,8 @@
 #include "generate_primes.c"
 
+#define TARGET 512  // getting hung up at this value, doesn't make sense
 //-#define TARGET   13195
+//-#define TARGET 600000000
 //-#define TARGET 600851475143
 //- 600,851,475,143
 
@@ -86,11 +88,14 @@ int main()
         gives 2, 2, 5 for 20
         gives 2, 2, 2, 5 for 40
     - could use back-check -- does multiplication of factors return n?
+    NO getting hung up on value 512, not clear why
+    - problem emerged with use of next_prime()
 
     BUT
     - segfaults on problem #3 target value
         - segfault resolved by specifying long int for arguments of is_prime, factorize
         - still slow
     - very slow
+
 
  */
