@@ -30,7 +30,7 @@ int *factorize(n)
             if (!is_prime(dividend)) {
                 dividend_factors = factorize(dividend);
                 while ( ( df_val = dividend_factors[j++] ) != -1 ) {
-                    factors[factors_ndx++] = val;
+                    factors[factors_ndx++] = df_val;
                 }
             } else {
                 factors[factors_ndx++] = dividend;
@@ -54,7 +54,7 @@ int main()
     int j = 0;
     int val;
 
-    prime_list = factorize(20);
+    prime_list = factorize(40);
     //-prime_list = list_primes(20);
 
     while ( ( val = prime_list[j] ) != -1 ) {
@@ -67,9 +67,8 @@ int main()
 /*
     STATUS
 
-    segmentation fault issue fixed (had a runaway loop)
-    now printing out prime factors of 20, but too many of them
-    - now printing out the right number of prime factors for 20, but not printing 5
-        - getting 2, 2, 2, instead of 2, 2, 5
+    - seems to be working
+        gives 2, 2, 5 for 20
+        gives 2, 2, 2, 5 for 40
 
  */
