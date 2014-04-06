@@ -5,7 +5,7 @@ Provides list of prime factors of TARGET value.
 
 STATUS
 - Solves problem on Thorin
-- FAILS on Volundr
+- FAILS on Volundr, Gloin
     - probably the target value is larger than can be held by long int on Volundr
         - am I sure that it isn't on Thorin?
     - If so, probably fixed by using type float (yes?) rather than long int
@@ -60,7 +60,8 @@ TO CHECK A NUMBER FOR PRIME
 #define TRUE 1
 #define FALSE 0
 
-#define TARGET 600851475143
+#define TARGET 13195
+//- #define TARGET 600851475143
 
 typedef int Bool;
 
