@@ -41,7 +41,6 @@ int *factorize(long n)
 
     long int val = 1;
     while ( ( val = next_prime(val) ) != -1 && !dividend ) {
-    //-1-while ( ( val = primes[i++] ) != -1 && !dividend ) {
         if ( n % val == 0 ) {
             factors[factors_ndx++] = val;
             dividend = n / val;
@@ -76,6 +75,42 @@ int *factorize(long n)
 }
 
 
+float max(float_ry)
+/*
+    Returns largest value in an array of floats
+    - presumes array values end on -1
+
+    STATUS
+    Unknown -- not yet used or tested
+ */
+{
+    int i=0, val;
+    float max = 0;
+    while ( ( val = float_ry ) != -1 ) {
+        if ( val > max ) {
+            max = val;
+        }
+    }
+}
+
+float largest_prime_factor(float n)
+/*
+    Returns value of largest prime factor of n.
+
+    STATUS
+    Unknown -- not yet used.
+
+ */
+{
+    int *prime_list;    
+    float max_factor;
+
+    prime_list = factorize(TARGET);
+    max_factor = max(prime_list);
+    return max_factor;
+
+}
+
 
 int main()
 /*
@@ -83,6 +118,10 @@ int main()
 
  */
 {
+    printf("%ld\n", largest_prime_factor(TARGET));
+    return 0;   // weed: what is bash convention for successful program execution?
+
+    /*  Prior -- worked
     int *prime_list;    
     int j = 0;
     int val;
@@ -94,18 +133,20 @@ int main()
         printf("%d\n", val);
         j++;
     }
+     */
 }
 
 
 /*
     STATUS
 
-    - seems to be working
+    - prior seems to be working
         gives 2, 2, 5 for 20
         gives 2, 2, 2, 5 for 40
 
-    - has back-check
+    - has back-check on factorization
 
+    - new code not used 
 
 
  */
