@@ -61,6 +61,22 @@ int *list_primes(long int n)
 
     return prime_list;
 
+    /*
+        PROBLEM
+        How to revise this to return an array holding only the primes, and not ending on -1
+
+        DRAFT CODE
+
+        int new_array_size = pl_ndx;    // if the prior array holds 3 elements, its last index will be 2, while the new array must be size 3 to hold all the elements including the -1.  So the new array must be size 2 to hold all elements but the -1.
+
+        int *new_list = calloc(new_array_size, sizeof(int));
+
+        for ( i = 0; i < new_array_size; i++ ) {   
+            new_list[i] = prime_list[i];
+        }
+
+     */
+
 }
 
 
@@ -82,6 +98,7 @@ long int next_prime(long int n)
     return j;
 }
 
+/*--------------------------------------------------------------------------*/
 int *factorize(long n)
 /*
     Returns pointer to array of prime factors of n.

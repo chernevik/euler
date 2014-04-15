@@ -1,0 +1,103 @@
+I suspect that seg faults on Volundr and Gloin are caused by a target number larger than the long int value of those machines.
+
+Alternatives:
+1.  Use float -- which seems to allow for larger values than long integer
+    -   but this would still leave the problem of arbitrarily large numbers, as some will exceed the allowable float value
+
+2.  Work out procedure for dividing numbers larger than largest available data type
+
+
+
+Problem: 
+
+Find means of dividing a number of arbitrarily long length, return both the divisor and a remainder.
+
+Thought Experiment:
+
+Say we had to divide 213 by 3, but could use no numbers larger than 100.
+
+We would do this manually by expressing 213 as the addition of exponents of 10:
+2 * 10 ^ 2 + 1 * 10 ^ 1 + 3 * 10 ^ 0.
+
+We would divide the first of those exponents terms by 3 like so: 
+    - We would begin with an answer of zero.
+    - We would divide the factor term (here 2) by three, getting a divisor and a remainder.  
+    - We would multiply the divisor (here 0) by the exponent factor ( here 10^2) and add this to the answer.
+    - We would multiply the remainder (here 2) by the next lower exponent (10 ^ 1) and add to the next exponent term (eg, 2 * 10^1 + 1 * 10^1  ARRGHH NO
+
+    We break up the denominator into terms just larger than the numerator.
+    For each exponent of ten, the divisor times the exponent is added to the answer
+    the remainder 
+
+228 / 3
+
+22 / 3 : divisor is 7, remainder is 1
+- this is 2 * 10^2 + 2 * 10^1; also 22 * 10^1
+- 7 * 10 ^ 2 is added to the answer
+- 1 * 10 ^ 1 is added to the next exponent term (8 * 10 ^ 0)
+- we are taking the first exponent terms of the denominator less than the numerator, dividing the exponent factor by that numerator, and conducting operations on the result and remaining exponent terms based on the exponent of the exponent factor
+
+RECAP
+- express denominator as exponents of ten
+- express numerator as exponents of ten
+- from front of denominator, take as many exponent terms as need to exceed those of the denonominator
+- divide the taken terms by the numerator
+    - divisor times the exponent factor - 1 is added to the solution
+    - remainder times exponent factor - 1 is added to remaining denominator
+    - repeat
+
+So dividing 228 by 3
+- 22 * 10^2 / 3 * 10 ^ 1
+    - divisor 7 * 10^1 added to solution
+    - remainder 1 * 10^1 is added to remaining denominator
+
+Algorithm
+- convert numbers into a stack
+
+
+
+PSEUDO CODE
+
+factor_large(char n)
+/*
+    Factors numbers larger than long int can hold
+
+    Number is passed in as a string
+    
+    Returns array of factors
+
+ */
+{
+}
+
+
+divide_large(char denom, char num)
+/*
+    Divides number, passed in as character, by numerator, returning divisor and remainder
+    - provides ability to divide numbers larger than those handled by the compiler's largest numeric type
+ */
+{
+}
+
+
+express_large(char n)
+/*
+    Returns an array of struct objects representing n
+    - supports ability to handle numbers larger than those handled by the compiler's largest numeric type
+ */
+{
+    // Get length of denom string
+    // - largest exponent of ten is string length - 1
+
+    // Read string into array of structs
+    // - each struct has a multiple and an exponent
+    // - multiple is the digit
+    // - exponent is the exponent of ten
+    // - so for 1234, the first digit has a multiple of 1 and an exponent of 3; the second, multiple of 2, exponent of 2
+
+    // array holds these structs in descending order of exponent
+    
+    // for
+
+}
+
