@@ -1,14 +1,20 @@
+/*--------------------------------------------------------------------------*/
+/*
+    Complete code implementing solution for Project Euler Problem #3
+
+ */
+/*--------------------------------------------------------------------------*/
 #include <stdio.h>
 #include <stdlib.h>
 
 #define TARGET 600851475143
 
 
+/*--------------------------------------------------------------------------*/
 #define TRUE 1
 #define FALSE 0
 
 typedef int Bool;
-
 
 Bool is_prime(int n) 
 /* 
@@ -56,8 +62,6 @@ int *factorize(long n)
 
  */
 {
-    printf("factorize %ld\n", n);
-
     int *primes;
     int *dividend_factors;
     int *factors = calloc(n, sizeof(int));
@@ -69,14 +73,6 @@ int *factorize(long n)
         factors[factors_ndx] = -1;
         return factors;
     }
-
-    // this generates a lot of primes that aren't used -- costly
-    // revise to define and use a function that returns the next prime number?
-
-    /*
-        How to revise this to use next_prime(), rather than generating a long
-        list of primes?
-     */
 
     long int val = 1;
     while ( !dividend ) {
@@ -96,9 +92,7 @@ int *factorize(long n)
     }
     factors[factors_ndx] = -1;
 
-    // add back check on factors
-    // add -- somewhere -- check to get maximum value
-
+    // back check on factors
     long int check_val = 1;
     int k = 0;
     while ( ( val = factors[k++] ) != -1 ) {
@@ -137,7 +131,6 @@ long int max(int *ry)
 }
 
 /*--------------------------------------------------------------------------*/
-
 int main()
 /*
     Outputs list_primes() contents.
@@ -153,3 +146,4 @@ int main()
 }
 
 
+/*--------------------------------------------------------------------------*/
