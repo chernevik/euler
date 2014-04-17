@@ -186,6 +186,8 @@ int largest_palindrome(int d1, int d2)
 
     int *palindromes = calloc(ARRAY_SIZE, sizeof(int));
 
+    int chk_ry[ARRAY_SIZE];
+    int i, prod_copy, j, palindromic, max = 0;
 
     /*
         We don't need to loop all the values of val2, as this duplicates values
@@ -194,13 +196,36 @@ int largest_palindrome(int d1, int d2)
 
     for ( val1 = min1; val1 <= max1; val1++ ) {
         for ( val2 = min2; val2 <= max2 && val2 <= val1; val2++ ) {
+
             prod = val1 * val2;
-                // check prod for palindrome
-                // if palindrome, check for max
+            prod_copy = prod;
+            i = 0;
+
+            // get prod digits into array
+            while ( prod > 0 ) {
+                chk_ry[i] = prod % 10;
+                prod = ( prod - chk_ry[i] ) / 10;
+                i++;
+            }
+
+            // check array for palindrome
+            j = 0;
+            palindromic = 1;
+            for ( j = 0; j < i/2; j++ ) {
+                if ( chk_ry[j] != chk_ry[i -1 -j] ) {
+                    palindromic = 0;
+                }
+            }
+
+            if ( palindromic ) {
+                if ( prod_copy > max ) {
+                    max = prod_copy;
+                }
+            }
         }
     }
 
-    return palindromes;
+    return max;
 }
 
 
@@ -254,7 +279,11 @@ int main ()
     return 0;
  */
     
+/*
     printf("%d\n", get_first(9123));
+ */
+
+    printf("%d\n", largest_palindrome(2, 2));
 
     // returning 906609
     // takes 0.101 seconds (real) on Thorin
