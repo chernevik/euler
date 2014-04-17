@@ -172,6 +172,38 @@ int *get_palindromes(int d1, int d2)
 }
 
 
+/* ------------------------------------------------------------------------ */
+int largest_palindrome(int d1, int d2)
+/*
+    Returns largest palindrome without using subfunctions
+ */
+{
+    int val1, val2, prod, ry_ndx=0;
+    int min1 = power(10, d1 - 1);
+    int max1 = power(10, d1) - 1;
+    int min2 = power(10, d1 - 1);
+    int max2 = power(10, d1) - 1;
+
+    int *palindromes = calloc(ARRAY_SIZE, sizeof(int));
+
+
+    /*
+        We don't need to loop all the values of val2, as this duplicates values
+        already checked
+     */
+
+    for ( val1 = min1; val1 <= max1; val1++ ) {
+        for ( val2 = min2; val2 <= max2 && val2 <= val1; val2++ ) {
+            prod = val1 * val2;
+                // check prod for palindrome
+                // if palindrome, check for max
+        }
+    }
+
+    return palindromes;
+}
+
+
 /*--------------------------------------------------------------------------*/
 int max(int *ry)
 /*
@@ -193,12 +225,36 @@ int max(int *ry)
 }
 
 /* ------------------------------------------------------------------------ */
+int get_first(int n)
+/*
+    Gets the first digit of n
+ */
+{
+    int i;
+    while ( power(10, i) < n ) {
+        i++;
+    }
+
+    int p = i - 1;
+    i = 0;
+    while ( power(10, p) * i < n ) {
+        i++;
+    }
+
+    return i - 1;
+}
+
+/* ------------------------------------------------------------------------ */
 int main ()
 {
+/*
     int *palindromes;
     palindromes = get_palindromes(2, 2);
     printf("largest palindrome is %d\n", max(palindromes));
     return 0;
+ */
+    
+    printf("%d\n", get_first(9123));
 
     // returning 906609
     // takes 0.101 seconds (real) on Thorin
