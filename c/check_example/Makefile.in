@@ -79,7 +79,7 @@ subdir = .
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
 	$(srcdir)/config.h.in README build-aux/compile \
-	build-aux/install-sh build-aux/missing \
+	build-aux/depcomp build-aux/install-sh build-aux/missing \
 	$(top_srcdir)/build-aux/compile \
 	$(top_srcdir)/build-aux/install-sh \
 	$(top_srcdir)/build-aux/missing

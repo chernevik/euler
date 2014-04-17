@@ -1,0 +1,3 @@
+Directory check_example copied from /usr/local/Cellar/check/0.9.12/share/doc/check
+
+
