@@ -51,12 +51,10 @@ void *reverse_ry(int *ry)
 
  */
 {
-    int ry_size;
     int swap, i=0;
-    int reversals;
 
-    ry_size = size_ry(ry);
-    reversals = ry_size / 2;   
+    int ry_size = size_ry(ry);
+    int reversals = ry_size / 2;   
 
     for ( i=0; i <= reversals; i++) {
         swap = ry[i];
@@ -135,25 +133,29 @@ int power (int base, int exponent)
     }
     return val;
 }
+
 /* ------------------------------------------------------------------------ */
 int *get_palindromes(int d1, int d2)
 /*
     Returns pointer to array of palindromes resulting from multiplication of all number of n1 digits by numbers of n2 digits
  */
 {
-    int min1, min2, max1, max2, val1, val2, prod, ry_ndx;
-    min1 = power(10, d1 - 1);
-    max1 = power(10, d1) - 1;
-    min2 = power(10, d1 - 1);
-    max2 = power(10, d1) - 1;
-    printf("%d\n", min1);
-    printf("%d\n", max1);
+    int val1, val2, prod, ry_ndx=0;
+    int min1 = power(10, d1 - 1);
+    int max1 = power(10, d1) - 1;
+    int min2 = power(10, d1 - 1);
+    int max2 = power(10, d1) - 1;
+
     int *palindromes = calloc(ARRAY_SIZE, sizeof(int));
 
-    ry_ndx = 0;
+
+    /*
+        We don't need to loop all the values of val2, as this duplicates values
+        already checked
+     */
 
     for ( val1 = min1; val1 <= max1; val1++ ) {
-        for ( val2 = min2; val2 <= max2; val2++ ) {
+        for ( val2 = min2; val2 <= max2 && val2 <= val1; val2++ ) {
             prod = val1 * val2;
             if ( is_palindrome(prod) ) {
             /*
@@ -190,58 +192,6 @@ int max(int *ry)
 
 }
 
-/*--------------------------------------------------------------------------*/
-int test_main ()
-{
-    /*
-    max_palindrome = largest_palindrome(SEED1, SEED2);
-    printf("%d\n", max_palindrome);
-    */
-
-    int n = 123;
-/*
-    printf("strip_final(%d): %d\n", n, strip_final(n));
- */
-
-    int *ry;
-    int i=0;
-/*
-    ry = get_digits(n);
-    while ( ( ry[i] ) != -1 ) {
-        printf("%d\n", ry[i++]);
-    }
- */
-    
-    int ry2[4];
-    ry2[0] = 1;
-    ry2[1] = 2;
-    ry2[2] = 3;
-    ry2[3] = -1;
-
-/*
-    printf("%d\n", size_ry(ry2));
-
-    reverse_ry(ry2);
-    i = 0;
-    while ( ( ry2[i] ) != -1 ) {
-        printf("%d\n", ry2[i++]);
-    }
-
-    int *ry3;
-
-    ry3 = get_digits(n);
-    i = 0;
-    while ( ( ry3[i] ) != -1 ) {
-        printf("%d\n", ry3[i++]);
-    }
-    printf("%d\n", is_palindrome_ry(ry2));
-    printf("%d\n", is_palindrome(1221));
- */
-
-    return 0;   // what is the bash convention for successful program termination?
-
-}
-
 /* ------------------------------------------------------------------------ */
 int main ()
 {
@@ -251,7 +201,7 @@ int main ()
     return 0;
 
     // returning 906609
-    // takes 0.206 seconds (real) on Thorin
+    // takes 0.101 seconds (real) on Thorin
 }
 
 /* ------------------------------------------------------------------------ */
