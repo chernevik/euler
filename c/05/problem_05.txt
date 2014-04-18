@@ -1,3 +1,19 @@
 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
 
 What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+
+
+NOTES
+
+Postulate -- Divisibility: A numerator is evenly divisible by a denominator if the factors of the denominator are a subset of the factors of the numerator.
+
+
+IF TRUE:
+- need a set of the factors of numbers less than or equal to 20
+- the lowest evenly divisible number will be some multiple of the primes
+-   I think this will do it, actually
+
+-   not sure what other conditions might apply -- if the 
+
+
+- how to check for lower?
