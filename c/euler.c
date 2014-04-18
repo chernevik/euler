@@ -105,6 +105,8 @@ int *factorize(long n)
 
     Array ends with -1.
 
+    weed: must define handling when passed 0 or 1
+
  */
 {
     int *primes;
@@ -350,10 +352,13 @@ int *get_palindromes(int d1, int d2)
 
 
 /*--------------------------------------------------------------------------*/
-int max(int *ry)
+int max_int(int *ry)
 /*
     Returns value of largest element in array.
     - Presumes array ends with -1
+    - for int types
+    - weed: any way to write this to handle long int and int?
+    - weed: renaming function probably breaks solution to #4
  */
 {
     int i = 0;
@@ -389,4 +394,50 @@ int get_first(int n)
     return i - 1;
 }
 
+/* ------------------------------------------------------------------------ */
+int in(int val, int *ry)
+/*
+    Checks whether val is equal to any member of array ry
+    - assumes ry ends in -1
+
+ */
+{
+    int in=0, chk_val, i=0;
+
+    while ( ( chk_val = ry[i++] ) != -1 ) {
+        if ( val == chk_val ) {
+            in = 1;
+            break;
+        }
+    }
+
+    return in;
+
+}
+
+/* ------------------------------------------------------------------------ */
+int *unique(int *ry)
+/*
+    Returns an array holding unique members of ry
+    - presumes ry ends in -1
+ */
+{
+    int *set = calloc(1000, sizeof(int));
+    int i=0, val;
+    int set_ndx = 0;
+
+    set[set_ndx] = -1;
+
+    while ( ( val = ry[i++] ) != -1 ) {
+        if ( !in(i, set) ) {
+            set[set_ndx++] = i;    
+            set[set_ndx++] = -1;    
+        }
+    }
+
+    set[set_ndx] = -1;
+
+    return set;
+
+}
 /* ------------------------------------------------------------------------ */

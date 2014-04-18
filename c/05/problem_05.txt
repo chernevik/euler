@@ -17,3 +17,11 @@ IF TRUE:
 
 
 - how to check for lower?
+    - take number
+        - loop divisors
+
+
+Process for any arbitrary N:
+-   get primes less than N
+-   first candidate is product of those primes
+-   check all numbers less than candidate for divisibility by all numbers less than N
