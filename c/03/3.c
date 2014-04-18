@@ -37,6 +37,7 @@ Bool is_prime(int n)
 }
 
 
+/*--------------------------------------------------------------------------*/
 long int next_prime(long int n)
 /*
     Returns the next prime number after n.
@@ -55,6 +56,7 @@ long int next_prime(long int n)
 }
 
 
+/*--------------------------------------------------------------------------*/
 int *factorize(long n)
 /*
     Returns pointer to array of prime factors of n.
