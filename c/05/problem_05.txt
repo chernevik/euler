@@ -25,3 +25,6 @@ Process for any arbitrary N:
 -   get primes less than N
 -   first candidate is product of those primes
 -   check all numbers less than candidate for divisibility by all numbers less than N
+
+
+THIS APPROACH IS FLAWED

@@ -4,7 +4,8 @@
     STATUS:
         
         compiles
-        prints candidate 1 (clearly wrong), fails on floating point exception: 8
+        doesn't generate correct answer for 10
+        - approach isn't right
  
  */
 
@@ -13,7 +14,7 @@
 
 #include "../euler.c"
 
-#define TARGET 20
+#define TARGET 10
 #define ARRAY_SIZE_2 1000
 
 int main ()
@@ -25,7 +26,7 @@ int main ()
     int *factor_set =       calloc(ARRAY_SIZE_2, sizeof(int));
     int prod = 1;
     int val, i=0, fs_ndx=0, j;
-    int prodcopy = prod;
+    int prodcopy;
     int divisible;
 
 
@@ -40,22 +41,34 @@ int main ()
         }
     }
 
+    factor_set[fs_ndx] = -1;
     unique_factors = unique(factor_set);
 
-    while ( (val = unique_factors[i++] != -1 ) )  {
+    // see what's in factor_set
+    i = 0;
+    while ( ( val = factor_set[i++] ) != -1 ) {
+        printf("fs: %d\n", val);
+    }
+
+    i = 0;
+    while ( (val = unique_factors[i++] ) != -1  )  {
+        printf("val: %d\n", val);
         prod = prod *  val;    
     }
 
-    printf("candidate: %d\n", prod);
-    for ( ; prodcopy > 0; prodcopy-- ) {
+    //-printf("candidate: %d\n", prod);
+    for ( prodcopy = prod; prodcopy > 0; prodcopy-- ) {
+        //-printf("prodcopy: %d\n", prodcopy);
         divisible = 1;
-        for ( j = 0; j <= n; j++ ) {
+        for ( j = 1; j <= n; j++ ) {
+            //-printf("j:%d\n", j);
             if ( prodcopy % j != 0 ) {
                 divisible = 0;
-                break;
+                //-break;
             }
         }
-        if ( divisible ) {
+        if ( divisible == 1 ) {
+            //-printf("nc: %d\n", prodcopy);
             prod = prodcopy;
         }
     }

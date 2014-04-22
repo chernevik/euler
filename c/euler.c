@@ -429,13 +429,13 @@ int *unique(int *ry)
     set[set_ndx] = -1;
 
     while ( ( val = ry[i++] ) != -1 ) {
-        if ( !in(i, set) ) {
-            set[set_ndx++] = i;    
-            set[set_ndx++] = -1;    
+        if ( !in(val, set) ) {
+            set[set_ndx++] = val;    
+            set[set_ndx] = -1;    
         }
     }
 
-    set[set_ndx] = -1;
+    //-set[set_ndx] = -1;
 
     return set;
 
