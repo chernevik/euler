@@ -22,12 +22,6 @@ int main()
         prime = next_prime(prime);
     }
 
-/*
-    for ( i=1; i<=n; i++) {
-        prime = next_prime(prime);
-    }
- */
-
     printf("%ld\n", prime);
 
     return 0;
