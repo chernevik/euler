@@ -30,6 +30,8 @@ What is the greatest product of four adjacent numbers in the same direction (up,
 
 Note: The red marked numbers begin with the 7th row, 9th column, and then proceed diagonally to include four numbers.
 
+Answer: 70600674
+
  */
 
 
@@ -73,19 +75,78 @@ int main()
             val_str[0] = grid[i*60+j*3];
             val_str[1] = grid[i*60+j*3+1];
             val_str[2] = '\0';
-            printf("%s\n", val_str);
+//-            printf("%s\n", val_str);
             grid_values[i][j] = atoi(val_str);
         }
     }
 
+/*
     printf("from grid:\n");
     for ( i=0; i<dim; i++ ) {
         for ( j=0; j<dim; j++ ) {
             printf("%d\n", grid_values[i][j]);
         }
     }
+ */
 
 
+    int adj = 4, k, max=0, prod;
+
+    for ( i=0; i<dim; i++ ) {
+        for ( j=0; j<dim; j++ ) {
+
+            // check four right adjacents
+
+            if ( ( j + adj ) < dim ) {
+                prod = 1;
+                for ( k=0; k<adj; k++ ) {
+                    prod *= grid_values[i][j+k];
+                }
+                if ( prod > max ) {
+                    max = prod;
+                }
+            }
+            
+            // check four down adjacents
+
+            if ( ( i + adj ) < dim ) {
+                prod = 1;
+                for ( k=0; k<adj; k++ ) {
+                    prod *= grid_values[i+k][j];
+                }
+                if ( prod > max ) {
+                    max = prod;
+                }
+            }
+
+            // check four diagonal adjacents down and to the right
+
+            if ( ( i + adj ) < dim && ( j + adj ) < dim ) {
+                prod = 1;
+                for ( k=0; k<adj; k++ ) {
+                    prod *= grid_values[i+k][j+k];
+                }
+                if ( prod > max ) {
+                    max = prod;
+                }
+            }
+
+            // check four diagonal adjacents down and to the left
+
+            if ( ( i + adj ) < dim && ( j - adj ) > 0 ) {
+                prod = 1;
+                for ( k=0; k<adj; k++ ) {
+                    prod *= grid_values[i+k][j-k];
+                }
+                if ( prod > max ) {
+                    max = prod;
+                }
+            }
+
+        }
+    }
+
+    printf("%d\n", max); 
 
     return 0;
 }
