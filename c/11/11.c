@@ -34,6 +34,8 @@ Note: The red marked numbers begin with the 7th row, 9th column, and then procee
 
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 int main() 
 {
@@ -60,14 +62,26 @@ int main()
         "20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54\n"
         "01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48\n";
 
-    printf("%s\n", grid);
+//-    printf("%s\n", grid);
 
-    int dim = 20;
+    int dim = 20, i, j;
+    char val_str[3];
     int grid_values[dim][dim];
 
-    for ( i=0; i<=dim; i++ ) {
-        for ( j=0; j<=dim; ) {
-            val = ARGGH MUST GO READ ABOUT STRINGS
+    for ( i=0; i<dim; i++ ) {
+        for ( j=0; j<dim; j++ ) {
+            val_str[0] = grid[i*60+j*3];
+            val_str[1] = grid[i*60+j*3+1];
+            val_str[2] = '\0';
+            printf("%s\n", val_str);
+            grid_values[i][j] = atoi(val_str);
+        }
+    }
+
+    printf("from grid:\n");
+    for ( i=0; i<dim; i++ ) {
+        for ( j=0; j<dim; j++ ) {
+            printf("%d\n", grid_values[i][j]);
         }
     }
 
