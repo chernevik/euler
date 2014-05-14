@@ -106,6 +106,7 @@ int *factorize(long n)
     Array ends with -1.
 
     weed: must define handling when passed 0 or 1
+    weed: should be named prime_factorize
 
  */
 {
