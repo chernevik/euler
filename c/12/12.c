@@ -22,10 +22,6 @@ What is the value of the first triangle number to have OVER five hundred divisor
 ANSWER
 76576500
 
-NOTES
-This seems to be working, but takes an awfully long time to run
-- edits make it much faster
-
 
  */
 
@@ -38,9 +34,6 @@ This seems to be working, but takes an awfully long time to run
 long triangular(tri, n)
 /*
     Returns triangular number n, given the prior triangular number
-
-    weed: could be made faster by passing in the prior triangular number and the n of that triangular.  This would avoid re-running this loop for every single triangular.
-
  */
 {
     return tri + n;
@@ -49,9 +42,6 @@ long triangular(tri, n)
 int *list_factors(long int n)
 /*
  Returns a pointer to an array of the factors of n.
-
- weed: could be made faster by capturing and using information about the other factor when a factor is discovered.  The existence of a factor implies a reciprocal.  If the factors are found in ascending order, the reciprocals will be found in descending order.  So the reciprocal of the lower factor can be added to the list of factors, and the search for factors re-capped at that reciprocal, as no further factors will be found that are greater than that reciprocal.  This would cut processing time for this function at least in half, as it would avoid re-discovering half of the factors, and would avoid checking many values that cannot possibly be factors.
-
  */
 {
     int *factors = calloc(1000, sizeof(long int));
@@ -63,12 +53,14 @@ int *list_factors(long int n)
     for ( i=1; i <= cap; i++ ) {
         if ( n % i == 0 ) {
             factors[j++] = i;
-            factors[j++] = n / i;       // add reciprocal factor of i to factors
-            cap = n / i - 1;            // reset value of cap to reciprocal less one, as reciprocal is added to factors and no other factor will be greater than that reciprocal
+            factors[j++] = n / i;   // add reciprocal factor of i to factors
+            cap = n / i - 1;        
+                // reset value of cap to reciprocal less one, as reciprocal is
+                // added to factors and no other factor will be greater than
+                // that reciprocal
         }
     }
 
-    // factors[j++] = n;        // n will be captured by reciprocal handling
     factors[j] = -1;
 
     return factors;
@@ -77,24 +69,6 @@ int *list_factors(long int n)
 
 int main ()
 {
-    /* various checks on functions written
-
-    long int val;
-    int i = 0;
-    int *factors;
-    int count;
-
-    factors = list_factors(10);
-
-    while ( ( val = factors[i++] ) != -1 ) {
-        printf("%ld\n", val);
-    }
-
-    count = size_ry(factors);
-    printf("%d\n", count);
-    return 0;
-     */
-
     int i = 1;
     int *factors;
     int factors_count, tri = 0;
@@ -102,10 +76,6 @@ int main ()
     factors = list_factors(1);
 
     while ( (factors_count = size_ry(factors)) <= 500 ) {
-        if ( factors_count % 50 == 0 ) {
-            printf("tri: %d\n", tri);
-            printf("factors: %d\n", factors_count);
-        }
         tri = triangular(tri, i++);
         factors = list_factors(tri);
     }
