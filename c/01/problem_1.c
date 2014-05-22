@@ -13,6 +13,10 @@ ANSWER
 
 #include <stdio.h>
 
+/*
+    I'm sure this is very clever, but it is hard to read
+ */
+
 int sum_divisibles()
 {
     int ndx, mult_3, mult_5, sum = 0,  LIMIT = 1000;
@@ -20,6 +24,17 @@ int sum_divisibles()
         sum += mult_3 + ( ( mult_5 = ndx * 5 ) < LIMIT && mult_5 % 3 != 0 ) * mult_5;
     };
     return sum;
+
+
+    /*
+        How is works:
+        - loop goes through multiples of 3 less than LIMIT
+        - that multiple is added to sum, plus
+        - the ndx value times 5 if that multiple is less than the limit and that multiple isn't divisible by 3
+
+        Note that the logic test checking mult_5 against limit and divisibility returns 1 if true and 0 if not.  So that expression assigns a value to mult_5, checks that value for limit and divisibility by three, and multiplies that value by the 1 or 0 returned by the logic test.
+
+     */
 }
 
 main()
