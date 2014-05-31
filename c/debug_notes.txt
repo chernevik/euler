@@ -11,3 +11,8 @@ in debugger:
 - observe variables:
     << print [variable name] >>
 
+how to set break points:
+    break [file:]function
+    - sets break point at function
+    
+can breaks be set inside functions? 
