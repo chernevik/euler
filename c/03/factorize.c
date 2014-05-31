@@ -6,7 +6,7 @@
 //- 600,851,475,143
 
 
-int *factorize(long n)
+int *factorize(long int n)
 /*
     Returns pointer to array of prime factors of n.
 
@@ -106,6 +106,7 @@ int main()
 
     - has back-check
 
-
+    - not compiling properly on Volundr, does compile on Thorin
+        - differences in size of number handled by long int?
 
  */
