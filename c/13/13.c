@@ -52,12 +52,12 @@
 #include <string.h>
 
 #include "../euler.c"
+#include "concepts/string_tools.c"
 
 
-const char * get_final_str(char *num_str)
 /*
+const char * get_final_str(char *num_str)
     Returns the last character of a string
- */
 {
     int len;
     char res[2];
@@ -66,6 +66,7 @@ const char * get_final_str(char *num_str)
     res[1] = "\0";
     return res;
 }
+ */
 
 
 int sum_last(long long *numbers_ry, int *digits_ry) 
@@ -89,6 +90,58 @@ int sum_last(long long *numbers_ry, int *digits_ry)
         }
         sum += get_final(val);
         numbers_ry[i] = strip_final(val);
+        if ( numbers_ry[i] != 0 ) {
+            halt = 0;
+        }
+        i++;
+    }
+
+    // Find end of digits_ry, put last digit of sum there, reset -1 element
+
+    int j = 0;
+    int val2;
+
+    while ( ( val2 = digits_ry[j] ) != -1 ) {
+        j++;
+    }
+
+    digits_ry[j++] = get_final(sum);
+    digits_ry[j] = -1;
+
+    // put sum, stripped of last digit, in numbers_ry, and reset -1 element
+    numbers_ry[i++] = strip_final(sum);
+    numbers_ry[i] = -1;
+
+    return halt;
+
+}
+
+int sum_last_str(char *numbers_ry, int *digits_ry) 
+/*
+    Strips and the last digits of the numbers in numbers_ry, putting the last digit of that sum into digits_ry and putting that sum, stripped of that last digit, into numbers_ry
+
+    numbers_ry:
+        An array of character strings representing numbers
+
+ */
+{
+    int sum = 0;
+    int i = 0;
+
+    int halt = 1;
+
+    char val;
+    int val_int;
+
+    while ( ( val = numbers_ry[i] ) != -1 ) {
+        //-printf("%d\n", val);
+        val_int = val - '0';    // convert char to int
+        if ( val_int == 0 ) {
+            i++;
+            continue;
+        }
+        sum += get_final_str(val_int);
+        numbers_ry[i] = strip_final_str(val);
         if ( numbers_ry[i] != 0 ) {
             halt = 0;
         }
@@ -244,11 +297,11 @@ int main()
     */
 
 /*
+ */
     int halt = 0;
-    int i = 0;
 
     while ( !halt ) {
-        halt = sum_last(data, digits_ry);
+        halt = sum_last_str(data, digits_ry);
     }
 
     reverse_ry(digits_ry);
@@ -257,9 +310,5 @@ int main()
         printf("%d\n", val);
         i++;
     }
- */
 
-    char *res = get_final_str("able");
-    printf("%s\n", "cat");
-    printf("%s\n", res);
 }
