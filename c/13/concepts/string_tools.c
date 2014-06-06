@@ -17,9 +17,10 @@ char get_final_chr (char *num_str)
     return val;
 }
 
-char *strip_final_crh (char *num_str)
+void *strip_final_chr (char *num_str)
 /*
     Strips the last character off a string
+    works by side effect
  */
 {
     int len = strlen(num_str);
@@ -39,7 +40,7 @@ int main() {
 
     printf("the last digit is %c\n", last);
 
-    strip_final_crh(num);
+    strip_final_chr(num);
     printf("number is now %s\n", num);
 
     int final_num = last - '0';
