@@ -54,6 +54,7 @@
 #include "../euler.c"
 #include "concepts/string_tools.c"
 
+#define NUMBER_STR_SIZE 200
 
 /*
 const char * get_final_str(char *num_str)
@@ -116,7 +117,7 @@ int sum_last(long long *numbers_ry, int *digits_ry)
 
 }
 
-int sum_last_str(char *numbers_ry, int *digits_ry) 
+int sum_last_str(char *numbers_ry[NUMBER_STR_SIZE], int *digits_ry) 
 /*
     Strips and the last digits of the numbers in numbers_ry, putting the last digit of that sum into digits_ry and putting that sum, stripped of that last digit, into numbers_ry
 
@@ -130,7 +131,7 @@ int sum_last_str(char *numbers_ry, int *digits_ry)
 
     int halt = 1;
 
-    char val;
+    char val[NUMBER_STR_SIZE];
     int val_int;
 
     while ( ( val = numbers_ry[i] ) != -1 ) {
@@ -172,7 +173,7 @@ int main()
 {
     // STUB CODE
 
-     char data[1000][200] = {
+     char data[1000][NUMBER_STR_SIZE] = {
 "37107287533902102798797998220837590246510135740250",
 "46376937677490009712648124896970078050417018260538",
 "74324986199524741059474233309513058123726617309629",
