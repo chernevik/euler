@@ -3,6 +3,8 @@
     Work out the first ten digits of the sum of the following one-hundred 50-digit numbers
     - numbers held in numbers.txt
  
+    ANSWER:
+        5537376230
  */
 
 /*
@@ -11,8 +13,6 @@
     Assume that simply summing the numbers results in a number larger than memory can handle.
 
     - Read each number in as a string
-        - really? just put data into C code?
-
     - Get the last digit of each number (convert from character to integer)
         - strip that last digit off each number string?
     - Sum these digits
@@ -23,28 +23,14 @@
         - at end, summary array will contain the digits of the sum, in reverse order
 
     TODO
-    Add additional documentation for why this works
+    - Add additional documentation for why this works?
+    - revise to use arrays of dynamically allocated size?
+    - revise to read data for summation in from file?
 
 
     TECHNIQUES TO LEARN
     - read data from file into C program
         - really? could also just put numbers in one large array
-
-    - string handling to get last digit
-        - really? don't I already have library functions for getting the last digit of a number?  see palindrome code
-        - see get_final and strip_final in euler library
-        
-
-    NOTE
-    Approach works for smaller numbers, but 50 digit numbers are larger than largest available type
-    - must refactor to handle large numbers as strings
-    - express numbers as string
-    - write functions, analogous to get_final and strip_final, that operate on strings of numbers rather than numbers
-        - this will require figuring out stuff about string handling, which I've tried to avoid
-
-
-
-
  */
 
 #include <stdio.h>
@@ -52,7 +38,7 @@
 #include <string.h>
 
 #include "../euler.c"
-#include "concepts/string_tools.c"
+#include "lib13.c"
 
 #define NUMBER_STR_SIZE 400
 #define NUMBER_OF_NUMBERS 10000
@@ -60,34 +46,29 @@
 
 int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digits_ry) 
 /*
-    Strips and the last digits of the numbers in numbers_ry, putting the last digit of that sum into digits_ry and putting that sum, stripped of that last digit, into numbers_ry
+    Strips and the last digits of the numbers in numbers_ry, putting the last
+    digit of that sum into digits_ry and putting that sum, stripped of that
+    last digit, into numbers_ry
 
     numbers_ry:
         An array of character strings representing numbers
 
+    digits_ry
+        A pointer to an array that holds the digits of the sum
+
+    returns:
+        halt: a 1 or 0, depending on whether the numbers_ry passed in is exhausted.
+
  */
 {
-
-/*
-    printf("in sum_last_str\n");
- */
-
-    int sum = 0;
-    int i = 0;
-
-    int halt = 1;
+    int sum = 0, i = 0, halt = 1, goloop = 1, digit_int;
 
     char val[NUMBER_STR_SIZE] = "blank";
-    int digit_int;
     char digit_chr;
 
-    int goloop = 1;
 
     while ( goloop ) {
         strcpy(val, numbers_ry[i]);
-        /*
-        printf("%s\n", val);
-         */
 
         if ( strcmp(val, "-1") == 0 ) {
             goloop = 0;
@@ -116,10 +97,6 @@ int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digit
 
     char sum_str[NUMBER_STR_SIZE];
     sprintf(sum_str, "%d", sum);
-    /*
-    printf("sum_str is %s\n", sum_str);
-    printf("sum is %d\n", sum);
-     */
 
     // Find end of digits_ry, put last digit of sum there, reset -1 element
 
@@ -142,31 +119,12 @@ int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digit
     strcpy(numbers_ry[i++], sum_str);
     strcpy(numbers_ry[i], "-1");
 
-    // see what's in digits_ry
-    int k = 0;
-    int dr_val = 0;
-    /*
-    printf("digits_ry contents:\n");
-    while ( ( dr_val = digits_ry[k++] ) != -1 && k < 10 ) {
-        printf("%d\n", dr_val);
-    }
-    printf("digits_ry contents done\n");
-     */
-
     return halt;
 
 }
 
 int main() 
 {
-    // STUB CODE
-
-     char data2[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE] = {
-"124",
-"309",
-"-1"
-     };
-
      char data[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE] = {
 "37107287533902102798797998220837590246510135740250",
 "46376937677490009712648124896970078050417018260538",
@@ -272,46 +230,17 @@ int main()
     };
 
     int digits_ry[1000] = {-1};
-
     int summary_ry[1000];
-    int i = 0, j= 0, val = 0;
-    int sum = 0;
-
-    /* 
-        loop and following code sums last digits, puts last digit found in array, strips last digit off each value in array, and adds summed value (stripped of last value) to array of values to be summed
-        - how to make this a function of its own?
-        
-        function must do the following:
-        - put last digit of last digit sums into summary array
-        - strip last digit from all values in array
-        - add stripped sum of last digits to array of values to be summed
-        
-        do all of this by side effect, using pointers?
-
-
-    */
-
-/*
- */
-    int halt = 0;
+    int i = 0, j= 0, val = 0, sum = 0, halt = 0;
 
     while ( !halt ) {
         halt = sum_last_str(data, digits_ry);
-/*
-    while ( ( val = digits_ry[i++] ) != -1  && i < 10 ) {
-            printf("%d\n", val);
-            i++;
-        }
- */
     }
 
     reverse_ry(digits_ry);
-    // is reverse working properly?
 
     i = 0;
-    printf("here is digits_ry:\n");
     while ( ( val = digits_ry[i++] ) != -1  ) {
-    //-while ( ( val = digits_ry[i++] ) != -1  && i < 12 ) {
         printf("%d\n", val);
     }
 
