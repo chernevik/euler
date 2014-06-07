@@ -1,0 +1,32 @@
+2 by 2 Grid:
+
+row, col coordinates
+
+0,0     0,1     0,2
+1,0     1,1     1,2
+2,0     2,1     2,2
+
+
+x,y / col, row coordinates
+
+0,2     1,2     2,2
+0,1     1,1     2,1
+0,0     1,0     2,0
+
+
+- each move can subtract 1 from y or add 1 to x 
+- goal is to move from 0,2 to 2,0
+
+
+
+APPROACH:
+- represent graph as an adjacency matrix (Cormen et al, ch 22)
+
+- how to automate generation of the matrix?
+
+
+- number nodes in row order (top row 1 - 20, next row 21 - 40, etc)
+- a node can move to another if the next node is one greater or 20 greater
+    - for node 1, nodes 2 and 21 are adjacent
+
+
