@@ -296,12 +296,12 @@ int main()
     }
 
     reverse_ry(digits_ry);
+    // is reverse working properly?
 
+    i = 0;
     printf("here is digits_ry:\n");
-    //-while ( ( val = digits_ry[i++] ) != -1  && i < 10 ) {
-    while ( ( val = digits_ry[i++] ) != -1  ) {
+    while ( ( val = digits_ry[i++] ) != -1  && i < 10 ) {
         printf("%d\n", val);
-        i++;
     }
 
 }
