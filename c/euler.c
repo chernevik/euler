@@ -217,13 +217,9 @@ int size_ry(int *ry)
  */
  {
     int i = 0;
-    printf("entering size_ry\n");
     while (ry[i] != -1) {
-        printf("%d\n", ry[i]);
         i++;
     }
-    printf("leaving size_ry\n");
-    printf("array size in function is %d\n", i);
     return i;
  }
 /* ------------------------------------------------------------------------ */
@@ -238,11 +234,9 @@ void *reverse_ry(int *ry)
     int swap=0, i=0;
 
     int ry_size = size_ry(ry);
-    printf("array size is %d\n");
     int reversals = ry_size / 2;   
 
     for ( i=0; i < reversals; i++) {
-        printf("doing reversal %d\n", i);
         swap = ry[i];
         ry[i] = ry[ry_size - 1 - i];
         ry[ry_size -1 - i] = swap;

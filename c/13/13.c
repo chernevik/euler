@@ -68,7 +68,9 @@ int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digit
  */
 {
 
+/*
     printf("in sum_last_str\n");
+ */
 
     int sum = 0;
     int i = 0;
@@ -83,7 +85,9 @@ int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digit
 
     while ( goloop ) {
         strcpy(val, numbers_ry[i]);
+        /*
         printf("%s\n", val);
+         */
 
         if ( strcmp(val, "-1") == 0 ) {
             goloop = 0;
@@ -112,8 +116,10 @@ int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digit
 
     char sum_str[NUMBER_STR_SIZE];
     sprintf(sum_str, "%d", sum);
+    /*
     printf("sum_str is %s\n", sum_str);
     printf("sum is %d\n", sum);
+     */
 
     // Find end of digits_ry, put last digit of sum there, reset -1 element
 
@@ -139,11 +145,13 @@ int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digit
     // see what's in digits_ry
     int k = 0;
     int dr_val = 0;
+    /*
     printf("digits_ry contents:\n");
     while ( ( dr_val = digits_ry[k++] ) != -1 && k < 10 ) {
         printf("%d\n", dr_val);
     }
     printf("digits_ry contents done\n");
+     */
 
     return halt;
 
@@ -288,11 +296,13 @@ int main()
     int halt = 0;
 
     while ( !halt ) {
-        halt = sum_last_str(data2, digits_ry);
-        while ( ( val = digits_ry[i++] ) != -1  && i < 10 ) {
+        halt = sum_last_str(data, digits_ry);
+/*
+    while ( ( val = digits_ry[i++] ) != -1  && i < 10 ) {
             printf("%d\n", val);
             i++;
         }
+ */
     }
 
     reverse_ry(digits_ry);
@@ -300,7 +310,8 @@ int main()
 
     i = 0;
     printf("here is digits_ry:\n");
-    while ( ( val = digits_ry[i++] ) != -1  && i < 10 ) {
+    while ( ( val = digits_ry[i++] ) != -1  ) {
+    //-while ( ( val = digits_ry[i++] ) != -1  && i < 12 ) {
         printf("%d\n", val);
     }
 
