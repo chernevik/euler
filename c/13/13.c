@@ -60,17 +60,16 @@ int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digit
 
  */
 {
-    int sum = 0, i = 0, halt = 1, goloop = 1, digit_int;
+    int sum = 0, i = 0, halt = 1, digit_int;
 
     char val[NUMBER_STR_SIZE] = "blank";
     char digit_chr;
 
-
-    while ( goloop ) {
+    // loop numbers_ry, sum and strip final digits
+    while ( 1 ) {
         strcpy(val, numbers_ry[i]);
 
         if ( strcmp(val, "-1") == 0 ) {
-            goloop = 0;
             break;
         }
 
@@ -79,11 +78,7 @@ int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digit
             continue;
         }
 
-        
-        digit_chr = get_final_chr(val);
-        digit_int = digit_chr - '0';    // convert char to int
-
-        sum += digit_int;
+        sum += get_final_chr(val) - '0'; // convert char to int
         strip_final_chr(val);
         strcpy(numbers_ry[i], val);
         if ( strcmp(numbers_ry[i], "0") != 0 ) {
@@ -108,9 +103,8 @@ int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digit
 
     char sum_final_char;
     int sum_final_int;
-    sum_final_char = get_final_chr(sum_str);
-    sum_final_int = sum_final_char - '0';
-    digits_ry[j++] = sum_final_int;
+
+    digits_ry[j++] = get_final_chr(sum_str) - '0';
     digits_ry[j] = -1;
 
     // put sum, stripped of last digit, in numbers_ry, and reset -1 element
@@ -119,14 +113,19 @@ int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digit
     strcpy(numbers_ry[i], "-1");
 
     return halt;
-
 }
+
+
 
 int main() 
 {
 
+/*
+    Make separate function
+ */
     
     /* Read file into the array */
+
     char data[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE];
     int ii = 0, jj = 0, kk;
     FILE *fp;
@@ -147,17 +146,31 @@ int main()
         }
     }
 
+/*
+    Make separate function
+ */
     
+    /* set up other arrays and variables */
+
     int digits_ry[1000] = {-1};
     int summary_ry[1000];
     int i = 0, j= 0, val = 0, sum = 0, halt = 0;
+
+    /* 
+        Add final digits of strings in array, until those strings are
+        exhausted, storing the final digit of that sum in digits_ry
+
+    */
 
     while ( !halt ) {
         halt = sum_last_str(data, digits_ry);
     }
 
+    /* reverse the digits of the result array */
     reverse_ry(digits_ry);
 
+
+    /* print out the answer */
     i = 0;
     while ( ( val = digits_ry[i++] ) != -1  ) {
         printf("%d\n", val);
