@@ -43,6 +43,9 @@
 #define NUMBER_OF_NUMBERS 10000
 #define FILE_NAME "numbers.txt"
 
+
+
+/*--------------------------------------------------------------------------*/
 int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digits_ry) 
 /*
     Strips and the last digits of the numbers in numbers_ry, putting the last
@@ -116,20 +119,12 @@ int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digit
 }
 
 
-
-int main() 
+/*--------------------------------------------------------------------------*/
+void read_in_data(char *file_name, char data[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE])
 {
-
-/*
-    Make separate function
- */
-    
-    /* Read file into the array */
-
-    char data[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE];
     int ii = 0, jj = 0, kk;
     FILE *fp;
-    fp = fopen(FILE_NAME, "r");    
+    fp = fopen(file_name, "r");    
     while ( !feof(fp) ) {
         fgets(data[ii], sizeof(data[ii]), fp);
         ii++;
@@ -145,14 +140,15 @@ int main()
             }
         }
     }
+}
 
-/*
-    Make separate function
- */
-    
+
+/*--------------------------------------------------------------------------*/
+void add_number_strings(char data[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int digits_ry[1000])
+{
+
     /* set up other arrays and variables */
 
-    int digits_ry[1000] = {-1};
     int summary_ry[1000];
     int i = 0, j= 0, val = 0, sum = 0, halt = 0;
 
@@ -168,12 +164,30 @@ int main()
 
     /* reverse the digits of the result array */
     reverse_ry(digits_ry);
+}
 
+/*--------------------------------------------------------------------------*/
+int main() 
+{
+
+    /* Read file into the array */
+
+        /* revise function to return array, or pointer to array */
+    char data[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE];
+    read_in_data(FILE_NAME, data);
+
+    /* Sum numbers as strings */
+        /* revise function to return digits_ry, or pointer thereto */
+    int digits_ry[1000] = {-1};
+    add_number_strings(data, digits_ry);
 
     /* print out the answer */
-    i = 0;
+    int i = 0, val;
     while ( ( val = digits_ry[i++] ) != -1  ) {
         printf("%d\n", val);
     }
 
 }
+
+
+/*--------------------------------------------------------------------------*/
