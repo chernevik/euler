@@ -25,11 +25,15 @@
     TODO
     - Add additional documentation for why this works?
     - revise to use arrays of dynamically allocated size?
+    - revise to take name of data file from command line
+    - revise to use header files
 
+    STATUS
 
-    TECHNIQUES TO LEARN
-    - read data from file into C program
-        - really? could also just put numbers in one large array
+    Works
+
+    Compilationg generates some mysterious warnings
+
  */
 
 #include <stdio.h>
@@ -63,26 +67,27 @@ int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digit
 
  */
 {
-    int sum = 0, i = 0, halt = 1, digit_int;
+    int sum = 0, i = 0, halt = 1;
 
     char val[NUMBER_STR_SIZE] = "blank";
-    char digit_chr;
 
     // loop numbers_ry, sum and strip final digits
     while ( 1 ) {
         strcpy(val, numbers_ry[i]);
 
+        // weed: I would rather put the loop ending condition in the while expression, but am not sure how to do so here
         if ( strcmp(val, "-1") == 0 ) {
             break;
         }
 
+        // If array element is exhausted, skip it
         if ( strlen(val) == 0 ) {
             i++;
             continue;
         }
 
         sum += get_final_chr(val) - '0'; // convert char to int
-        strip_final_chr(val);
+        strip_final_chr(val);   // weed: works by side effect.  revise to return value?
         strcpy(numbers_ry[i], val);
         if ( strcmp(numbers_ry[i], "0") != 0 ) {
             halt = 0;
@@ -93,7 +98,7 @@ int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digit
     // convert sum to string
 
     char sum_str[NUMBER_STR_SIZE];
-    sprintf(sum_str, "%d", sum);
+    sprintf(sum_str, "%d", sum);    // converts integer to character
 
     // Find end of digits_ry, put last digit of sum there, reset -1 element
 
@@ -103,9 +108,6 @@ int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digit
     while ( ( val2 = digits_ry[j] ) != -1 ) {
         j++;
     }
-
-    char sum_final_char;
-    int sum_final_int;
 
     digits_ry[j++] = get_final_chr(sum_str) - '0';
     digits_ry[j] = -1;
@@ -120,37 +122,68 @@ int sum_last_str(char numbers_ry[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int *digit
 
 
 /*--------------------------------------------------------------------------*/
-void read_in_data(char *file_name, char data[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE])
+char * read_in_data( const char *file_name)
+/*
+    Reads data from file_name, returns that data as an array of strings.
+
+    Intended for a file holding a list of numbers as strings.
+
+ */
 {
-    int ii = 0, jj = 0, kk;
+    /*
+        QUESTION:
+        - How to use dynamically sized arrays here?
+
+        thoughts:
+        - will have to start with some initial values
+
+        - while reading in number strings, check if string is larger than NUMBER_STR_SIZE
+            - how?
+        - if string is larger, reset size of array 
+            - but then, how to capture line than first signalled size problem?  Would this be done with some sort of file location functionality?
+
+
+        - how to detect that strings available are greater than NUMBER_OF_NUMBERS?  
+
+     */
+    static char data[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE];
+
+    int i = 0, j = 0, k;
     FILE *fp;
     fp = fopen(file_name, "r");    
     while ( !feof(fp) ) {
-        fgets(data[ii], sizeof(data[ii]), fp);
-        ii++;
+        fgets(data[i], sizeof(data[i]), fp);
+        i++;
     }
 
-    strcpy(data[ii], "-1");
+    strcpy(data[i], "-1");
     
-    for ( jj=0; jj<=ii; jj++) {
+    for ( j=0; j<=i; j++) {
         // strip off line termination characters
-        for ( kk=0; kk <= sizeof(data[jj]); kk++ ) {
-            if ( data[jj][kk] == '\n' ) {
-                data[jj][kk] = '\0';
+        for ( k=0; k <= sizeof(data[j]); k++ ) {
+            if ( data[j][k] == '\n' ) {
+                data[j][k] = '\0';
             }
         }
     }
+
+    //-return data;
+        // above gets "warning: return from incompatible pointer type [enabled by default]"
+    return (char *)data;
+        // weed: why does casting to char * remove the warning?  I thought I was already returning a pointer array
 }
 
 
 /*--------------------------------------------------------------------------*/
-void add_number_strings(char data[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int digits_ry[1000])
+int * add_number_strings(
+    char data[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE]
+)
 {
 
     /* set up other arrays and variables */
 
-    int summary_ry[1000];
-    int i = 0, j= 0, val = 0, sum = 0, halt = 0;
+    static int digits_ry[1000] = {-1};
+    int halt = 0;
 
     /* 
         Add final digits of strings in array, until those strings are
@@ -164,6 +197,9 @@ void add_number_strings(char data[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE], int digit
 
     /* reverse the digits of the result array */
     reverse_ry(digits_ry);
+
+    return digits_ry;
+
 }
 
 /*--------------------------------------------------------------------------*/
@@ -172,14 +208,13 @@ int main()
 
     /* Read file into the array */
 
-        /* revise function to return array, or pointer to array */
-    char data[NUMBER_OF_NUMBERS][NUMBER_STR_SIZE];
-    read_in_data(FILE_NAME, data);
+    char * data;
+    data = read_in_data(FILE_NAME);
 
     /* Sum numbers as strings */
-        /* revise function to return digits_ry, or pointer thereto */
-    int digits_ry[1000] = {-1};
-    add_number_strings(data, digits_ry);
+
+    int * digits_ry;
+    digits_ry = add_number_strings(data);
 
     /* print out the answer */
     int i = 0, val;

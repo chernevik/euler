@@ -110,10 +110,9 @@ int *factorize(long n)
 
  */
 {
-    int *primes;
     int *dividend_factors;
     int *factors = calloc(n, sizeof(int));
-    int i=0, factors_ndx=0, j=0, df_val;
+    int factors_ndx=0, j=0, df_val;
     long int dividend=0;
 
     if (is_prime(n)) {
