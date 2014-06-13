@@ -40,6 +40,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "../euler.h"
 #include "../euler.c"
 #include "lib13.c"
 

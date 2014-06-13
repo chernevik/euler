@@ -6,6 +6,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "lib13.h"
+
 char get_final_chr (char *num_str)
 /*
     Returns the final character of a string.

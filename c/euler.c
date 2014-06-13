@@ -8,11 +8,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*--------------------------------------------------------------------------*/
-#define TRUE 1
-#define FALSE 0
+#include "boolean.h"
+#include "euler.h"
 
-typedef int Bool;
+/*--------------------------------------------------------------------------*/
 
 
 Bool is_prime(int n) 
