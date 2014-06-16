@@ -221,7 +221,7 @@ int size_ry(int *ry)
     return i;
  }
 /* ------------------------------------------------------------------------ */
-void *reverse_ry(int *ry)
+void reverse_ry(int *ry)
 /*
     Takes a pointer to an array, ending in -1, and reverses the values in the array.
 

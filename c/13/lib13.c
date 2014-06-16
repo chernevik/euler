@@ -19,7 +19,7 @@ char get_final_chr (char *num_str)
     return val;
 }
 
-void *strip_final_chr (char *num_str)
+void strip_final_chr (char *num_str)
 /*
     Strips the last character off a string
     works by side effect
@@ -27,6 +27,5 @@ void *strip_final_chr (char *num_str)
 {
     int len = strlen(num_str);
     num_str[len-1] = '\0';
-
 }
 

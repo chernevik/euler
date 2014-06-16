@@ -69,7 +69,7 @@ int size_ry(int *ry);
     - does not include the -1 in the array size
  */
 /* ------------------------------------------------------------------------ */
-void *reverse_ry(int *ry);
+void reverse_ry(int *ry);
 /*
     Takes a pointer to an array, ending in -1, and reverses the values in the array.
 

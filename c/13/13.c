@@ -158,7 +158,7 @@ char * read_in_data( const char *file_name)
     }
 
     strcpy(data[i], "-1");
-    
+  
     for ( j=0; j<=i; j++) {
         // strip off line termination characters
         for ( k=0; k <= sizeof(data[j]); k++ ) {
@@ -223,6 +223,7 @@ int main()
         printf("%d\n", val);
     }
 
+    return 0;
 }
 
 
